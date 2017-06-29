@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="vk_photos_and_albums" defaultIdMethod="native" namespace="VkPhotosAndAlbums\Models">
+
+    <!-- Users table -->
+    <table name="users" phpName="Users">
+        <column name="id"           phpName="Id"        type="integer"                  required="true" primaryKey="true"/>
+        <column name="first_name"   phpName="FirstName"     type="varchar"      size="255"  required="true"/>
+        <column name="last_name"    phpName="LastName"      type="varchar"      size="255"  required="true"/>
+        <column name="last_sync"  phpName="LastSync"    type="timestamp"                required="true" defaultExpr="now()"/>
+    </table>
+
+    <!-- Albums table -->
+    <table name="albums" phpName="Albums">
+        <column name="aid"          phpName="Id"        type="integer"                  required="true"     primaryKey="true"/>
+        <column name="owner_id"     phpName="OwnerId"   type="integer"                  required="true"/>
+        <column name="title"        phpName="Title"     type="varchar"      size="255"  required="true"/>
+        <column name="created"      phpName="Created"   type="timestamp"                required="true"/>
+        <column name="updated"      phpName="Updated"   type="timestamp"                required="true"/>
+        <column name="size"         phpName="Size"      type="varchar"      size="255"  required="true"/>
+        <column name="last_sync"    phpName="LastSync"  type="timestamp"                required="true"     defaultExpr="now()"/>
+        <index name="albums_owner_id_index">
+            <index-column name="owner_id"/>
+        </index>
+        <foreign-key foreignTable="users">
+            <reference local="owner_id" foreign="id"/>
+        </foreign-key>
+    </table>
+
+    <!-- Photos table -->
+    <table name="photos" phpName="Photos">
+        <column name="pid"          phpName="Id"        type="integer"              required="true" primaryKey="true"/>
+        <column name="album_id"     phpName="AlbumId"   type="integer"              required="true"/>
+        <column name="owner_id"     phpName="OwnerId"   type="integer"              required="true"/>
+        <column name="src"          phpName="Src"       type="varchar"  size="255"  required="true"/>
+        <column name="src_big"      phpName="SrcBig"    type="varchar"  size="255"  required="true"/>
+        <column name="src_small"    phpName="SrcSmall"  type="varchar"  size="255"  required="true"/>
+        <column name="src_xbig"     phpName="SrcXbig"   type="varchar"  size="255"  required="true"/>
+        <column name="width"        phpName="Width"     type="integer"              required="true"/>
+        <column name="height"       phpName="Height"    type="integer"              required="true"/>
+        <column name="title"        phpName="Title"     type="longvarchar"          required="true"/>
+        <column name="created"      phpName="Created"   type="timestamp"            required="true"/>
+        <column name="last_sync"    phpName="LastSync"  type="timestamp"            required="true" defaultExpr="now()"/>
+        <index name="photos_owner_id_index">
+            <index-column name="owner_id"/>
+        </index>
+        <foreign-key foreignTable="users">
+            <reference local="owner_id" foreign="id"/>
+        </foreign-key>
+        <foreign-key foreignTable="albums">
+            <reference local="album_id" foreign="aid"/>
+        </foreign-key>
+    </table>
+
+</database>

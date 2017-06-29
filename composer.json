@@ -1,0 +1,23 @@
+{
+    "name": "rooxie/vk-photos-and-albums",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Roman Derlemenko",
+            "email": "romanderlemenko@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "propel/propel": "2.0.0-alpha7",
+        "symfony/yaml": "3.2.2",
+        "guzzlehttp/guzzle": "^6.3",
+        "vlucas/phpdotenv": "^2.4",
+        "symfony/console": "^3.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "VkPhotosAndAlbums\\": "src/VkPhotosAndAlbums"
+        }
+    }
+}

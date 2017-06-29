@@ -1,0 +1,17 @@
+#!/usr/bin/php
+<?php
+
+/**
+ * Load Composer autoloader.
+ */
+require 'vendor/autoload.php';
+
+/**
+ * Allow accessing enviroment variables from .env file using getenv().
+ */
+(new \Dotenv\Dotenv(__DIR__))->load();
+
+/**
+ * Create and run the application.
+ */
+(\VkPhotosAndAlbums\Factory::build())->run();

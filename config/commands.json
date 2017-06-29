@@ -1,0 +1,34 @@
+{
+  "user": {
+    "opts": {
+      "show": {
+        "required": false,
+        "description": "Identification of the user"
+      }
+    }
+  },
+  "users": {
+    "args": {
+      "user-id": {
+        "required": true,
+        "description": "Identification of the user"
+      }
+    }
+  },
+  "photos": {
+    "args": {
+      "user-id": {
+        "required": true,
+        "description": "Identification of the user"
+      }
+    }
+  },
+  "albums": {
+    "args": {
+      "user-id": {
+        "required": true,
+        "description": "Identification of the user"
+      }
+    }
+  }
+}
