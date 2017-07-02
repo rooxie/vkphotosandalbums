@@ -3,8 +3,9 @@
 namespace VkPhotosAndAlbums\Service\VkApi;
 
 use VkPhotosAndAlbums\Service\VkApi\Contracts\VkPhotosAccess;
+use VkPhotosAndAlbums\Service\VkApi\Contracts\VkUsersAccess;
 
-class VkApiFacade implements VkPhotosAccess
+class VkApiFacade implements VkPhotosAccess, VkUsersAccess
 {
     /**
      * @var VkConnection
@@ -21,5 +22,10 @@ class VkApiFacade implements VkPhotosAccess
         $this->connection->callMethod('photos.getAll', $userIds);
 
         return $userIds;
+    }
+
+    public function getUsers(array $userIds): array
+    {
+        return $this->connection->callMethod('users.get', ['user_ids' => $userIds]);
     }
 }

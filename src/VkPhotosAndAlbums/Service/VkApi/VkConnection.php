@@ -25,22 +25,19 @@ class VkConnection
         $this->guzzle = new \GuzzleHttp\Client();
     }
 
-    public function callMethod(string $methodName, array $params = [])
+    public function callMethod(string $methodName, array $params = []): array
     {
+        $params['access_token'] = $this->token;
+        $return = [];
+
         try {
-            $response = $this->guzzle->get(self::REQUEST_URL . $methodName, [
-                'query' => [
-                    'user_ids' => ['7306153'],
-                    'access_token' => $this->token
-                ]
-            ]);
+            $response = $this->guzzle->get(self::REQUEST_URL . $methodName, ['query' => $params]);
             $content = json_decode($response->getBody()->getContents(), true);
-            var_dump($content); die;
+            $return = $content['response'];
         } catch (BadResponseException | \Exception $e) {
-            var_dump($e->getMessage()); die;
+            var_dump($e->getMessage());
         }
 
-
-        var_dump($response);
+        return $return;
     }
 }

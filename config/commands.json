@@ -1,4 +1,13 @@
 {
+  "users": {
+    "class": "UsersCommand",
+    "args": {
+      "user-id": {
+        "required": true,
+        "description": "Identification of the user"
+      }
+    }
+  },
   "photos": {
     "class": "PhotosCommand",
     "description": "Get user photos",
