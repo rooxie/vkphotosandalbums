@@ -10,14 +10,15 @@ require 'vendor/autoload.php';
 
 (new \Dotenv\Dotenv(__DIR__))->load();
 
+$name = getenv('DB_NAME');
 $propel = [
     'propel' => [
         'database' => [
             'connections' => [
-                getenv('APP_NAME') => [
-                    'adapter'    => getenv('ADAPTER') ,
+                $name => [
+                    'adapter'    => 'mysql',
                     'classname'  => 'Propel\Runtime\Connection\ConnectionWrapper',
-                    'dsn'        => getenv('ADAPTER') . ':host=' . getenv('DB_HOST') .';dbname=' . getenv('DB_NAME') . ';charset=utf8',
+                    'dsn'        => 'mysql:host=' . getenv('DB_HOST') .';dbname=' . getenv('DB_NAME') . ';charset=utf8',
                     'user'       => getenv('DB_USER'),
                     'password'   => getenv('DB_PASS'),
                     'attributes' => []
@@ -25,12 +26,12 @@ $propel = [
             ]
         ],
         'runtime' => [
-            'defaultConnection' => getenv('APP_NAME'),
-            'connections'       => [getenv('APP_NAME')]
+            'defaultConnection' => $name,
+            'connections'       => [$name]
         ],
         'generator' => [
-            'defaultConnection' => getenv('APP_NAME'),
-            'connections'       => [getenv('APP_NAME')],
+            'defaultConnection' => $name,
+            'connections'       => [$name],
             'dateTime' => [
                 'defaultTimeStampFormat' => 'Y-m-d H:i:s',
                 'defaultTimeFormat'      => 'H:i:s',

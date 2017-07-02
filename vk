@@ -14,4 +14,4 @@ require 'vendor/autoload.php';
 /**
  * Create and run the application.
  */
-(\VkPhotosAndAlbums\Factory::build())->run();
+(\VkPhotosAndAlbums\Factory::build(require 'config/propel.php'))->run();

@@ -3,7 +3,6 @@
 namespace VkPhotosAndAlbums;
 
 use Symfony\Component\Console\Input\InputArgument;
-use VkPhotosAndAlbums\Commands\PhotosCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 
@@ -11,8 +10,10 @@ class Factory
 {
     private const COMMANDS_NAMESPACE = '\\VkPhotosAndAlbums\\Commands\\';
 
-    public static function build(): Application
+    public static function build(array $propel): Application
     {
+        self::propel($propel);
+
         $appName = getenv('APP_NAME')   ?? 'Application';
         $version = getenv('VERSION')    ?? '1.0';
 
@@ -50,5 +51,25 @@ class Factory
         }
 
         return $command;
+    }
+
+    private static function propel(array $propel): void
+    {
+        $name   = getenv('DB_NAME');
+        $config = $propel['propel']['database']['connections'][$name];
+
+        $conatiner = \Propel\Runtime\Propel::getServiceContainer();
+        $conatiner->setAdapterClass($name, 'mysql');
+        $manager = new \Propel\Runtime\Connection\ConnectionManagerSingle();
+        $manager->setConfiguration([
+            'classname'  => $config['classname'],
+            'dsn'        => $config['dsn'],
+            'user'       => $config['user'],
+            'password'   => $config['password'],
+            'attributes' => $config['attributes'],
+        ]);
+        $manager->setName($name);
+        $conatiner->setConnectionManager($name, $manager);
+        $conatiner->setDefaultDatasource($name);
     }
 }
