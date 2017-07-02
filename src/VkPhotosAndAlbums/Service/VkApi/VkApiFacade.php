@@ -24,63 +24,39 @@ class VkApiFacade implements VkPhotosAccess, VkUsersAccess
 
     public function getPhotos(string $userId, int $limit = 200): array
     {
-        $collection = [];
-
-        $getBatch = function (int $offset) use ($userId, $limit): array {
-            return $this->connection->callMethod('photos.getAll', [
-                'owner_id'  => $userId,
-                'count'     => $limit,
-                'offset'    => $offset
-            ]);
-        };
-
-        $add = function (int $fetched = 0) use (&$collection, $getBatch, &$add): void {
-            $batch = $getBatch($fetched);
-
-            if ($photos = $batch['data']) {
-                foreach ($photos['items'] as $photo) {
-                    if (!isset($collection[$photo['id']])) {
-                        $collection[$photo['id']] = $photo;
-                        $fetched++;
-                    }
-                }
-
-                if ($photos['count'] - $fetched > 0) {
-                    $add($fetched);
-                }
-            }
-        };
-
-        $add();
-
-        return $collection;
+        return $this->getCollection('photos.getAll', $userId, $limit);
     }
 
     public function getAlbums(string $userId, int $limit = 200): array
     {
+        return $this->getCollection('photos.getAlbums', $userId, $limit);
+    }
+
+    protected function getCollection(string $method, string $userId, int $limit = 200): array
+    {
         $collection = [];
 
-        $getBatch = function (int $offset) use ($userId, $limit): array {
-            return $this->connection->callMethod('photos.getAll', [
+        $fetch = function (int $offset) use ($method, $userId, $limit): array {
+            return $this->connection->callMethod($method, [
                 'owner_id'  => $userId,
                 'count'     => $limit,
                 'offset'    => $offset
             ]);
         };
 
-        $add = function (int $fetched = 0) use (&$collection, $getBatch, &$add): void {
-            $batch = $getBatch($fetched);
+        $add = function (int $count = 0) use (&$collection, $fetch, &$add): void {
+            $batch = $fetch($count);
 
-            if ($photos = $batch['data']) {
-                foreach ($photos['items'] as $photo) {
-                    if (!isset($collection[$photo['id']])) {
-                        $collection[$photo['id']] = $photo;
-                        $fetched++;
+            if ($data = $batch['data']) {
+                foreach ($data['items'] as $item) {
+                    if (!isset($collection[$item['id']])) {
+                        $collection[$item['id']] = $item;
+                        $count++;
                     }
                 }
 
-                if ($photos['count'] - $fetched > 0) {
-                    $add($fetched);
+                if ($data['count'] - $count > 0) {
+                    $add($count);
                 }
             }
         };

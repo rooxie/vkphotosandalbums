@@ -3,15 +3,28 @@
 namespace VkPhotosAndAlbums\Commands;
 
 use Carbon\Carbon;
+use VkPhotosAndAlbums\Commands\Traits\CreateUser;
+use VkPhotosAndAlbums\Commands\Traits\FetchUsers;
+use VkPhotosAndAlbums\Models\UsersQuery;
 
 class PhotosCommand extends BaseCommand
 {
+    use CreateUser, FetchUsers;
+
     protected $args = ['user-id' => []];
-    protected $usersInDb = [];
 
     protected function perform(): void
     {
-        $photos = $this->vk()->getPhotos(array_pop($this->args['user-id']));
+        $userId = array_pop($this->args['user-id']);
+
+        $user = UsersQuery::create()->findById($userId);
+
+        if (!count($user)) {
+            $user = $this->fetchUsers([$userId])[0];
+            $user = $this->createUser($user['id'], $user['first_name'], $user['last_name']);
+        }
+
+        $photos = $this->vk()->getPhotos($userId);
 
         foreach ($photos as $photo) {
             $this->outputPhoto($photo);

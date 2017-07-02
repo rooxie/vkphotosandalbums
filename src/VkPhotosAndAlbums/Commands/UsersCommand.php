@@ -2,11 +2,14 @@
 
 namespace VkPhotosAndAlbums\Commands;
 
+use VkPhotosAndAlbums\Commands\Traits\CreateUser;
 use VkPhotosAndAlbums\Models\Users;
 use VkPhotosAndAlbums\Models\UsersQuery;
 
 class UsersCommand extends BaseCommand
 {
+    use CreateUser;
+
     protected $args = ['user-id' => []];
     protected $usersInDb = [];
 
@@ -23,11 +26,7 @@ class UsersCommand extends BaseCommand
             $remoteUsers = $this->vk()->getUsers($missing);
 
             foreach ($remoteUsers as $user) {
-                $newUser = (new Users())
-                    ->setId($user['id'])
-                    ->setFirstName($user['first_name'])
-                    ->setLastName($user['last_name']);
-                $newUser->save();
+                $newUser = $this->createUser($user['id'], $user['first_name'], $user['last_name']);
                 $this->outputUser($newUser, 'Vk API');
             }
         }

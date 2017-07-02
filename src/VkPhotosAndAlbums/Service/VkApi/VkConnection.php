@@ -30,10 +30,7 @@ class VkConnection
         $params['access_token'] = $this->token;
         $params['v']            = self::API_VERSION;
 
-        $return = [
-            'data'  => [],
-            'error' => ''
-        ];
+        $return                 = ['data'  => [], 'error' => ''];
 
         try {
             $response   = $this->guzzle->get(self::REQUEST_URL . $methodName, ['query' => $params]);

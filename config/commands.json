@@ -24,7 +24,7 @@
       }
     }
   },
-  "albums": {
+  "fetch-albums": {
     "class": "AlbumsCommand",
     "args": {
       "user-id": {
