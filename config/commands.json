@@ -8,9 +8,9 @@
       }
     }
   },
-  "photos": {
-    "class": "PhotosCommand",
-    "description": "Get user photos",
+  "fetch-photos": {
+    "class": "FetchPhotosCommand",
+    "description": "Fetch user photos from Vk",
     "args": {
       "user-id": {
         "required": true,
@@ -25,7 +25,7 @@
     }
   },
   "fetch-albums": {
-    "class": "AlbumsCommand",
+    "class": "FetchAlbumsCommand",
     "args": {
       "user-id": {
         "required": true,

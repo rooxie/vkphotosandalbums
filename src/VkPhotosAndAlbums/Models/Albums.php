@@ -16,5 +16,16 @@ use VkPhotosAndAlbums\Models\Base\Albums as BaseAlbums;
  */
 class Albums extends BaseAlbums
 {
-
+    public static function create(array $album): void
+    {
+        (new self())
+            ->setId($album['id'])
+            ->setOwnerId($album['owner_id'])
+            ->setTitle($album['title'])
+            ->setDescription($album['description'])
+            ->setCreated($album['created'])
+            ->setUpdated($album['updated'])
+            ->setSize($album['size'])
+            ->save();
+    }
 }

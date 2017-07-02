@@ -4,8 +4,8 @@
     <!-- Users table -->
     <table name="users" phpName="Users">
         <column name="id"           phpName="Id"            type="integer"                  required="true" primaryKey="true"/>
-        <column name="first_name"   phpName="FirstName"     type="varchar"      size="255"  required="true"/>
-        <column name="last_name"    phpName="LastName"      type="varchar"      size="255"  required="true"/>
+        <column name="first_name"   phpName="FirstName"     type="varchar"      size="255"  required="false"/>
+        <column name="last_name"    phpName="LastName"      type="varchar"      size="255"  required="false"/>
         <column name="last_sync"    phpName="LastSync"      type="timestamp"                required="true" defaultExpr="now()"/>
     </table>
 
