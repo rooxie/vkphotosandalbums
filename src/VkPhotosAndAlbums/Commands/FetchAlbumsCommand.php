@@ -4,7 +4,6 @@ namespace VkPhotosAndAlbums\Commands;
 
 use Propel\Runtime\Exception\PropelException;
 use Symfony\Component\Console\Helper\ProgressBar;
-use VkPhotosAndAlbums\Commands\Traits\CreateAlbum;
 use VkPhotosAndAlbums\Commands\Traits\CreateUser;
 use VkPhotosAndAlbums\Commands\Traits\FetchUsers;
 use VkPhotosAndAlbums\Models\Albums;
