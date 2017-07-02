@@ -32,13 +32,14 @@
         <column name="id"           phpName="Id"        type="integer"                  required="true" primaryKey="true"/>
         <column name="album_id"     phpName="AlbumId"   type="integer"                  required="false"/>
         <column name="owner_id"     phpName="OwnerId"   type="integer"                  required="true"/>
-        <column name="photo_75"     phpName="Photo75"   type="varchar"      size="255"  required="true"/>
-        <column name="photo_130"    phpName="Photo130"  type="varchar"      size="255"  required="true"/>
-        <column name="photo_604"    phpName="Photo604"  type="varchar"      size="255"  required="true"/>
-        <column name="photo_807"    phpName="Photo807"  type="varchar"      size="255"  required="true"/>
-        <column name="photo_1280"   phpName="Photo1280" type="varchar"      size="255"  required="true"/>
-        <column name="width"        phpName="Width"     type="integer"                  required="true"/>
-        <column name="height"       phpName="Height"    type="integer"                  required="true"/>
+        <column name="photo_75"     phpName="Photo75"   type="varchar"      size="255"  required="false"/>
+        <column name="photo_130"    phpName="Photo130"  type="varchar"      size="255"  required="false"/>
+        <column name="photo_604"    phpName="Photo604"  type="varchar"      size="255"  required="false"/>
+        <column name="photo_807"    phpName="Photo807"  type="varchar"      size="255"  required="false"/>
+        <column name="photo_1280"   phpName="Photo1280" type="varchar"      size="255"  required="false"/>
+        <column name="photo_2560"   phpName="Photo2560" type="varchar"      size="255"  required="false"/>
+        <column name="width"        phpName="Width"     type="integer"                  required="false"/>
+        <column name="height"       phpName="Height"    type="integer"                  required="false"/>
         <column name="text"         phpName="Text"      type="longvarchar"              required="false"/>
         <column name="created"      phpName="Created"   type="timestamp"                required="true"/>
         <column name="last_sync"    phpName="LastSync"  type="timestamp"                required="true" defaultExpr="now()"/>
