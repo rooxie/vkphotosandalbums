@@ -1,29 +1,22 @@
 {
-  "user": {
-    "opts": {
-      "show": {
-        "required": false,
-        "description": "Identification of the user"
-      }
-    }
-  },
-  "users": {
-    "args": {
-      "user-id": {
-        "required": true,
-        "description": "Identification of the user"
-      }
-    }
-  },
   "photos": {
+    "class": "PhotosCommand",
+    "description": "Get user photos",
     "args": {
       "user-id": {
         "required": true,
         "description": "Identification of the user"
+      }
+    },
+    "opts": {
+      "remote": {
+        "shortcut": "r",
+        "description": "Ignore database query and search directly on VK"
       }
     }
   },
   "albums": {
+    "class": "AlbumsCommand",
     "args": {
       "user-id": {
         "required": true,
