@@ -29,15 +29,16 @@
     <!-- Photos table -->
     <table name="photos" phpName="Photos">
         <column name="pid"          phpName="Id"        type="integer"              required="true" primaryKey="true"/>
-        <column name="album_id"     phpName="AlbumId"   type="integer"              required="true"/>
+        <column name="album_id"     phpName="AlbumId"   type="integer"              required="false"/>
         <column name="owner_id"     phpName="OwnerId"   type="integer"              required="true"/>
-        <column name="src"          phpName="Src"       type="varchar"  size="255"  required="true"/>
-        <column name="src_big"      phpName="SrcBig"    type="varchar"  size="255"  required="true"/>
-        <column name="src_small"    phpName="SrcSmall"  type="varchar"  size="255"  required="true"/>
-        <column name="src_xbig"     phpName="SrcXbig"   type="varchar"  size="255"  required="true"/>
+        <column name="photo_75"     phpName="Photo75"   type="varchar"  size="255"  required="true"/>
+        <column name="photo_130"    phpName="Photo130"  type="varchar"  size="255"  required="true"/>
+        <column name="photo_604"    phpName="Photo604"  type="varchar"  size="255"  required="true"/>
+        <column name="photo_807"    phpName="Photo807"  type="varchar"  size="255"  required="true"/>
+        <column name="photo_1280"   phpName="Photo1280" type="varchar"  size="255"  required="true"/>
         <column name="width"        phpName="Width"     type="integer"              required="true"/>
         <column name="height"       phpName="Height"    type="integer"              required="true"/>
-        <column name="title"        phpName="Title"     type="longvarchar"          required="true"/>
+        <column name="text"         phpName="Text"      type="longvarchar"          required="false"/>
         <column name="created"      phpName="Created"   type="timestamp"            required="true"/>
         <column name="last_sync"    phpName="LastSync"  type="timestamp"            required="true" defaultExpr="now()"/>
         <index name="photos_owner_id_index">
