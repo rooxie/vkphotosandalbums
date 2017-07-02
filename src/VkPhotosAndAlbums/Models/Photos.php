@@ -2,6 +2,7 @@
 
 namespace VkPhotosAndAlbums\Models;
 
+use Propel\Runtime\Collection\Collection;
 use VkPhotosAndAlbums\Models\Base\Photos as BasePhotos;
 
 /**
@@ -16,5 +17,10 @@ use VkPhotosAndAlbums\Models\Base\Photos as BasePhotos;
  */
 class Photos extends BasePhotos
 {
-
+    public static function create(array $photo): void
+    {
+        $self = (new self())
+            ->setId($photo['id'])
+            ->setOwnerId($photo['owner_id'])
+    }
 }

@@ -3,8 +3,11 @@
 namespace VkPhotosAndAlbums\Commands;
 
 use Carbon\Carbon;
+use Propel\Runtime\Exception\PropelException;
+use Symfony\Component\Console\Helper\ProgressBar;
 use VkPhotosAndAlbums\Commands\Traits\CreateUser;
 use VkPhotosAndAlbums\Commands\Traits\FetchUsers;
+use VkPhotosAndAlbums\Models\Photos;
 use VkPhotosAndAlbums\Models\UsersQuery;
 
 class FetchPhotosCommand extends BaseCommand
@@ -21,13 +24,21 @@ class FetchPhotosCommand extends BaseCommand
 
         if (!count($user)) {
             $user = $this->fetchUsers([$userId])[0];
-            $user = $this->createUser($user['id'], $user['first_name'], $user['last_name']);
+            $this->createUser($user['id'], $user['first_name'], $user['last_name']);
         }
 
         $photos = $this->vk()->getPhotos($userId);
 
+        $count = count($photos);
+        $progress = new ProgressBar($this->output, $count);
+
         foreach ($photos as $photo) {
-            $this->outputPhoto($photo);
+            try {
+                Photos::create($photo);
+            } catch (PropelException $e) {
+            }
+
+            $progress->advance();
         }
     }
 
