@@ -20,17 +20,19 @@ use VkPhotosAndAlbums\Models\Map\AlbumsTableMap;
  *
  *
  *
- * @method     ChildAlbumsQuery orderById($order = Criteria::ASC) Order by the aid column
+ * @method     ChildAlbumsQuery orderById($order = Criteria::ASC) Order by the id column
  * @method     ChildAlbumsQuery orderByOwnerId($order = Criteria::ASC) Order by the owner_id column
  * @method     ChildAlbumsQuery orderByTitle($order = Criteria::ASC) Order by the title column
+ * @method     ChildAlbumsQuery orderByDescription($order = Criteria::ASC) Order by the description column
  * @method     ChildAlbumsQuery orderByCreated($order = Criteria::ASC) Order by the created column
  * @method     ChildAlbumsQuery orderByUpdated($order = Criteria::ASC) Order by the updated column
  * @method     ChildAlbumsQuery orderBySize($order = Criteria::ASC) Order by the size column
  * @method     ChildAlbumsQuery orderByLastSync($order = Criteria::ASC) Order by the last_sync column
  *
- * @method     ChildAlbumsQuery groupById() Group by the aid column
+ * @method     ChildAlbumsQuery groupById() Group by the id column
  * @method     ChildAlbumsQuery groupByOwnerId() Group by the owner_id column
  * @method     ChildAlbumsQuery groupByTitle() Group by the title column
+ * @method     ChildAlbumsQuery groupByDescription() Group by the description column
  * @method     ChildAlbumsQuery groupByCreated() Group by the created column
  * @method     ChildAlbumsQuery groupByUpdated() Group by the updated column
  * @method     ChildAlbumsQuery groupBySize() Group by the size column
@@ -69,9 +71,10 @@ use VkPhotosAndAlbums\Models\Map\AlbumsTableMap;
  * @method     ChildAlbums findOne(ConnectionInterface $con = null) Return the first ChildAlbums matching the query
  * @method     ChildAlbums findOneOrCreate(ConnectionInterface $con = null) Return the first ChildAlbums matching the query, or a new ChildAlbums object populated from the query conditions when no match is found
  *
- * @method     ChildAlbums findOneById(int $aid) Return the first ChildAlbums filtered by the aid column
+ * @method     ChildAlbums findOneById(int $id) Return the first ChildAlbums filtered by the id column
  * @method     ChildAlbums findOneByOwnerId(int $owner_id) Return the first ChildAlbums filtered by the owner_id column
  * @method     ChildAlbums findOneByTitle(string $title) Return the first ChildAlbums filtered by the title column
+ * @method     ChildAlbums findOneByDescription(string $description) Return the first ChildAlbums filtered by the description column
  * @method     ChildAlbums findOneByCreated(string $created) Return the first ChildAlbums filtered by the created column
  * @method     ChildAlbums findOneByUpdated(string $updated) Return the first ChildAlbums filtered by the updated column
  * @method     ChildAlbums findOneBySize(string $size) Return the first ChildAlbums filtered by the size column
@@ -80,18 +83,20 @@ use VkPhotosAndAlbums\Models\Map\AlbumsTableMap;
  * @method     ChildAlbums requirePk($key, ConnectionInterface $con = null) Return the ChildAlbums by primary key and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildAlbums requireOne(ConnectionInterface $con = null) Return the first ChildAlbums matching the query and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
- * @method     ChildAlbums requireOneById(int $aid) Return the first ChildAlbums filtered by the aid column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildAlbums requireOneById(int $id) Return the first ChildAlbums filtered by the id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildAlbums requireOneByOwnerId(int $owner_id) Return the first ChildAlbums filtered by the owner_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildAlbums requireOneByTitle(string $title) Return the first ChildAlbums filtered by the title column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildAlbums requireOneByDescription(string $description) Return the first ChildAlbums filtered by the description column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildAlbums requireOneByCreated(string $created) Return the first ChildAlbums filtered by the created column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildAlbums requireOneByUpdated(string $updated) Return the first ChildAlbums filtered by the updated column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildAlbums requireOneBySize(string $size) Return the first ChildAlbums filtered by the size column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildAlbums requireOneByLastSync(string $last_sync) Return the first ChildAlbums filtered by the last_sync column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
  * @method     ChildAlbums[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildAlbums objects based on current ModelCriteria
- * @method     ChildAlbums[]|ObjectCollection findById(int $aid) Return ChildAlbums objects filtered by the aid column
+ * @method     ChildAlbums[]|ObjectCollection findById(int $id) Return ChildAlbums objects filtered by the id column
  * @method     ChildAlbums[]|ObjectCollection findByOwnerId(int $owner_id) Return ChildAlbums objects filtered by the owner_id column
  * @method     ChildAlbums[]|ObjectCollection findByTitle(string $title) Return ChildAlbums objects filtered by the title column
+ * @method     ChildAlbums[]|ObjectCollection findByDescription(string $description) Return ChildAlbums objects filtered by the description column
  * @method     ChildAlbums[]|ObjectCollection findByCreated(string $created) Return ChildAlbums objects filtered by the created column
  * @method     ChildAlbums[]|ObjectCollection findByUpdated(string $updated) Return ChildAlbums objects filtered by the updated column
  * @method     ChildAlbums[]|ObjectCollection findBySize(string $size) Return ChildAlbums objects filtered by the size column
@@ -194,7 +199,7 @@ abstract class AlbumsQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT aid, owner_id, title, created, updated, size, last_sync FROM albums WHERE aid = :p0';
+        $sql = 'SELECT id, owner_id, title, description, created, updated, size, last_sync FROM albums WHERE id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -268,7 +273,7 @@ abstract class AlbumsQuery extends ModelCriteria
     public function filterByPrimaryKey($key)
     {
 
-        return $this->addUsingAlias(AlbumsTableMap::COL_AID, $key, Criteria::EQUAL);
+        return $this->addUsingAlias(AlbumsTableMap::COL_ID, $key, Criteria::EQUAL);
     }
 
     /**
@@ -281,17 +286,17 @@ abstract class AlbumsQuery extends ModelCriteria
     public function filterByPrimaryKeys($keys)
     {
 
-        return $this->addUsingAlias(AlbumsTableMap::COL_AID, $keys, Criteria::IN);
+        return $this->addUsingAlias(AlbumsTableMap::COL_ID, $keys, Criteria::IN);
     }
 
     /**
-     * Filter the query on the aid column
+     * Filter the query on the id column
      *
      * Example usage:
      * <code>
-     * $query->filterById(1234); // WHERE aid = 1234
-     * $query->filterById(array(12, 34)); // WHERE aid IN (12, 34)
-     * $query->filterById(array('min' => 12)); // WHERE aid > 12
+     * $query->filterById(1234); // WHERE id = 1234
+     * $query->filterById(array(12, 34)); // WHERE id IN (12, 34)
+     * $query->filterById(array('min' => 12)); // WHERE id > 12
      * </code>
      *
      * @param     mixed $id The value to use as filter.
@@ -307,11 +312,11 @@ abstract class AlbumsQuery extends ModelCriteria
         if (is_array($id)) {
             $useMinMax = false;
             if (isset($id['min'])) {
-                $this->addUsingAlias(AlbumsTableMap::COL_AID, $id['min'], Criteria::GREATER_EQUAL);
+                $this->addUsingAlias(AlbumsTableMap::COL_ID, $id['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
             if (isset($id['max'])) {
-                $this->addUsingAlias(AlbumsTableMap::COL_AID, $id['max'], Criteria::LESS_EQUAL);
+                $this->addUsingAlias(AlbumsTableMap::COL_ID, $id['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -322,7 +327,7 @@ abstract class AlbumsQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(AlbumsTableMap::COL_AID, $id, $comparison);
+        return $this->addUsingAlias(AlbumsTableMap::COL_ID, $id, $comparison);
     }
 
     /**
@@ -391,6 +396,31 @@ abstract class AlbumsQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(AlbumsTableMap::COL_TITLE, $title, $comparison);
+    }
+
+    /**
+     * Filter the query on the description column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByDescription('fooValue');   // WHERE description = 'fooValue'
+     * $query->filterByDescription('%fooValue%', Criteria::LIKE); // WHERE description LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $description The value to use as filter.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildAlbumsQuery The current query, for fluid interface
+     */
+    public function filterByDescription($description = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($description)) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(AlbumsTableMap::COL_DESCRIPTION, $description, $comparison);
     }
 
     /**
@@ -636,7 +666,7 @@ abstract class AlbumsQuery extends ModelCriteria
     {
         if ($photos instanceof \VkPhotosAndAlbums\Models\Photos) {
             return $this
-                ->addUsingAlias(AlbumsTableMap::COL_AID, $photos->getAlbumId(), $comparison);
+                ->addUsingAlias(AlbumsTableMap::COL_ID, $photos->getAlbumId(), $comparison);
         } elseif ($photos instanceof ObjectCollection) {
             return $this
                 ->usePhotosQuery()
@@ -655,7 +685,7 @@ abstract class AlbumsQuery extends ModelCriteria
      *
      * @return $this|ChildAlbumsQuery The current query, for fluid interface
      */
-    public function joinPhotos($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinPhotos($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         $tableMap = $this->getTableMap();
         $relationMap = $tableMap->getRelation('Photos');
@@ -690,7 +720,7 @@ abstract class AlbumsQuery extends ModelCriteria
      *
      * @return \VkPhotosAndAlbums\Models\PhotosQuery A secondary query class using the current class as primary query
      */
-    public function usePhotosQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function usePhotosQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         return $this
             ->joinPhotos($relationAlias, $joinType)
@@ -707,7 +737,7 @@ abstract class AlbumsQuery extends ModelCriteria
     public function prune($albums = null)
     {
         if ($albums) {
-            $this->addUsingAlias(AlbumsTableMap::COL_AID, $albums->getId(), Criteria::NOT_EQUAL);
+            $this->addUsingAlias(AlbumsTableMap::COL_ID, $albums->getId(), Criteria::NOT_EQUAL);
         }
 
         return $this;

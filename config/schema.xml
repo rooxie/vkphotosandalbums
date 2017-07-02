@@ -49,7 +49,7 @@
             <reference local="owner_id" foreign="id"/>
         </foreign-key>
         <foreign-key foreignTable="albums">
-            <reference local="album_id" foreign="aid"/>
+            <reference local="album_id" foreign="id"/>
         </foreign-key>
     </table>
 

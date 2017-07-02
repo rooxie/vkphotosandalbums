@@ -59,7 +59,7 @@ class PhotosTableMap extends TableMap
     /**
      * The total number of columns
      */
-    const NUM_COLUMNS = 12;
+    const NUM_COLUMNS = 13;
 
     /**
      * The number of lazy-loaded columns
@@ -69,12 +69,12 @@ class PhotosTableMap extends TableMap
     /**
      * The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS)
      */
-    const NUM_HYDRATE_COLUMNS = 12;
+    const NUM_HYDRATE_COLUMNS = 13;
 
     /**
-     * the column name for the pid field
+     * the column name for the id field
      */
-    const COL_PID = 'photos.pid';
+    const COL_ID = 'photos.id';
 
     /**
      * the column name for the album_id field
@@ -87,24 +87,29 @@ class PhotosTableMap extends TableMap
     const COL_OWNER_ID = 'photos.owner_id';
 
     /**
-     * the column name for the src field
+     * the column name for the photo_75 field
      */
-    const COL_SRC = 'photos.src';
+    const COL_PHOTO_75 = 'photos.photo_75';
 
     /**
-     * the column name for the src_big field
+     * the column name for the photo_130 field
      */
-    const COL_SRC_BIG = 'photos.src_big';
+    const COL_PHOTO_130 = 'photos.photo_130';
 
     /**
-     * the column name for the src_small field
+     * the column name for the photo_604 field
      */
-    const COL_SRC_SMALL = 'photos.src_small';
+    const COL_PHOTO_604 = 'photos.photo_604';
 
     /**
-     * the column name for the src_xbig field
+     * the column name for the photo_807 field
      */
-    const COL_SRC_XBIG = 'photos.src_xbig';
+    const COL_PHOTO_807 = 'photos.photo_807';
+
+    /**
+     * the column name for the photo_1280 field
+     */
+    const COL_PHOTO_1280 = 'photos.photo_1280';
 
     /**
      * the column name for the width field
@@ -117,9 +122,9 @@ class PhotosTableMap extends TableMap
     const COL_HEIGHT = 'photos.height';
 
     /**
-     * the column name for the title field
+     * the column name for the text field
      */
-    const COL_TITLE = 'photos.title';
+    const COL_TEXT = 'photos.text';
 
     /**
      * the column name for the created field
@@ -143,11 +148,11 @@ class PhotosTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('Id', 'AlbumId', 'OwnerId', 'Src', 'SrcBig', 'SrcSmall', 'SrcXbig', 'Width', 'Height', 'Title', 'Created', 'LastSync', ),
-        self::TYPE_CAMELNAME     => array('id', 'albumId', 'ownerId', 'src', 'srcBig', 'srcSmall', 'srcXbig', 'width', 'height', 'title', 'created', 'lastSync', ),
-        self::TYPE_COLNAME       => array(PhotosTableMap::COL_PID, PhotosTableMap::COL_ALBUM_ID, PhotosTableMap::COL_OWNER_ID, PhotosTableMap::COL_SRC, PhotosTableMap::COL_SRC_BIG, PhotosTableMap::COL_SRC_SMALL, PhotosTableMap::COL_SRC_XBIG, PhotosTableMap::COL_WIDTH, PhotosTableMap::COL_HEIGHT, PhotosTableMap::COL_TITLE, PhotosTableMap::COL_CREATED, PhotosTableMap::COL_LAST_SYNC, ),
-        self::TYPE_FIELDNAME     => array('pid', 'album_id', 'owner_id', 'src', 'src_big', 'src_small', 'src_xbig', 'width', 'height', 'title', 'created', 'last_sync', ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+        self::TYPE_PHPNAME       => array('Id', 'AlbumId', 'OwnerId', 'Photo75', 'Photo130', 'Photo604', 'Photo807', 'Photo1280', 'Width', 'Height', 'Text', 'Created', 'LastSync', ),
+        self::TYPE_CAMELNAME     => array('id', 'albumId', 'ownerId', 'photo75', 'photo130', 'photo604', 'photo807', 'photo1280', 'width', 'height', 'text', 'created', 'lastSync', ),
+        self::TYPE_COLNAME       => array(PhotosTableMap::COL_ID, PhotosTableMap::COL_ALBUM_ID, PhotosTableMap::COL_OWNER_ID, PhotosTableMap::COL_PHOTO_75, PhotosTableMap::COL_PHOTO_130, PhotosTableMap::COL_PHOTO_604, PhotosTableMap::COL_PHOTO_807, PhotosTableMap::COL_PHOTO_1280, PhotosTableMap::COL_WIDTH, PhotosTableMap::COL_HEIGHT, PhotosTableMap::COL_TEXT, PhotosTableMap::COL_CREATED, PhotosTableMap::COL_LAST_SYNC, ),
+        self::TYPE_FIELDNAME     => array('id', 'album_id', 'owner_id', 'photo_75', 'photo_130', 'photo_604', 'photo_807', 'photo_1280', 'width', 'height', 'text', 'created', 'last_sync', ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
     );
 
     /**
@@ -157,11 +162,11 @@ class PhotosTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('Id' => 0, 'AlbumId' => 1, 'OwnerId' => 2, 'Src' => 3, 'SrcBig' => 4, 'SrcSmall' => 5, 'SrcXbig' => 6, 'Width' => 7, 'Height' => 8, 'Title' => 9, 'Created' => 10, 'LastSync' => 11, ),
-        self::TYPE_CAMELNAME     => array('id' => 0, 'albumId' => 1, 'ownerId' => 2, 'src' => 3, 'srcBig' => 4, 'srcSmall' => 5, 'srcXbig' => 6, 'width' => 7, 'height' => 8, 'title' => 9, 'created' => 10, 'lastSync' => 11, ),
-        self::TYPE_COLNAME       => array(PhotosTableMap::COL_PID => 0, PhotosTableMap::COL_ALBUM_ID => 1, PhotosTableMap::COL_OWNER_ID => 2, PhotosTableMap::COL_SRC => 3, PhotosTableMap::COL_SRC_BIG => 4, PhotosTableMap::COL_SRC_SMALL => 5, PhotosTableMap::COL_SRC_XBIG => 6, PhotosTableMap::COL_WIDTH => 7, PhotosTableMap::COL_HEIGHT => 8, PhotosTableMap::COL_TITLE => 9, PhotosTableMap::COL_CREATED => 10, PhotosTableMap::COL_LAST_SYNC => 11, ),
-        self::TYPE_FIELDNAME     => array('pid' => 0, 'album_id' => 1, 'owner_id' => 2, 'src' => 3, 'src_big' => 4, 'src_small' => 5, 'src_xbig' => 6, 'width' => 7, 'height' => 8, 'title' => 9, 'created' => 10, 'last_sync' => 11, ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+        self::TYPE_PHPNAME       => array('Id' => 0, 'AlbumId' => 1, 'OwnerId' => 2, 'Photo75' => 3, 'Photo130' => 4, 'Photo604' => 5, 'Photo807' => 6, 'Photo1280' => 7, 'Width' => 8, 'Height' => 9, 'Text' => 10, 'Created' => 11, 'LastSync' => 12, ),
+        self::TYPE_CAMELNAME     => array('id' => 0, 'albumId' => 1, 'ownerId' => 2, 'photo75' => 3, 'photo130' => 4, 'photo604' => 5, 'photo807' => 6, 'photo1280' => 7, 'width' => 8, 'height' => 9, 'text' => 10, 'created' => 11, 'lastSync' => 12, ),
+        self::TYPE_COLNAME       => array(PhotosTableMap::COL_ID => 0, PhotosTableMap::COL_ALBUM_ID => 1, PhotosTableMap::COL_OWNER_ID => 2, PhotosTableMap::COL_PHOTO_75 => 3, PhotosTableMap::COL_PHOTO_130 => 4, PhotosTableMap::COL_PHOTO_604 => 5, PhotosTableMap::COL_PHOTO_807 => 6, PhotosTableMap::COL_PHOTO_1280 => 7, PhotosTableMap::COL_WIDTH => 8, PhotosTableMap::COL_HEIGHT => 9, PhotosTableMap::COL_TEXT => 10, PhotosTableMap::COL_CREATED => 11, PhotosTableMap::COL_LAST_SYNC => 12, ),
+        self::TYPE_FIELDNAME     => array('id' => 0, 'album_id' => 1, 'owner_id' => 2, 'photo_75' => 3, 'photo_130' => 4, 'photo_604' => 5, 'photo_807' => 6, 'photo_1280' => 7, 'width' => 8, 'height' => 9, 'text' => 10, 'created' => 11, 'last_sync' => 12, ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
     );
 
     /**
@@ -181,16 +186,17 @@ class PhotosTableMap extends TableMap
         $this->setPackage('VkPhotosAndAlbums.Models');
         $this->setUseIdGenerator(false);
         // columns
-        $this->addPrimaryKey('pid', 'Id', 'INTEGER', true, null, null);
-        $this->addForeignKey('album_id', 'AlbumId', 'INTEGER', 'albums', 'aid', true, null, null);
+        $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
+        $this->addForeignKey('album_id', 'AlbumId', 'INTEGER', 'albums', 'id', false, null, null);
         $this->addForeignKey('owner_id', 'OwnerId', 'INTEGER', 'users', 'id', true, null, null);
-        $this->addColumn('src', 'Src', 'VARCHAR', true, 255, null);
-        $this->addColumn('src_big', 'SrcBig', 'VARCHAR', true, 255, null);
-        $this->addColumn('src_small', 'SrcSmall', 'VARCHAR', true, 255, null);
-        $this->addColumn('src_xbig', 'SrcXbig', 'VARCHAR', true, 255, null);
+        $this->addColumn('photo_75', 'Photo75', 'VARCHAR', true, 255, null);
+        $this->addColumn('photo_130', 'Photo130', 'VARCHAR', true, 255, null);
+        $this->addColumn('photo_604', 'Photo604', 'VARCHAR', true, 255, null);
+        $this->addColumn('photo_807', 'Photo807', 'VARCHAR', true, 255, null);
+        $this->addColumn('photo_1280', 'Photo1280', 'VARCHAR', true, 255, null);
         $this->addColumn('width', 'Width', 'INTEGER', true, null, null);
         $this->addColumn('height', 'Height', 'INTEGER', true, null, null);
-        $this->addColumn('title', 'Title', 'LONGVARCHAR', true, null, null);
+        $this->addColumn('text', 'Text', 'LONGVARCHAR', false, null, null);
         $this->addColumn('created', 'Created', 'TIMESTAMP', true, null, null);
         $this->addColumn('last_sync', 'LastSync', 'TIMESTAMP', true, null, 'now()');
     } // initialize()
@@ -211,7 +217,7 @@ class PhotosTableMap extends TableMap
   0 =>
   array (
     0 => ':album_id',
-    1 => ':aid',
+    1 => ':id',
   ),
 ), null, null, null, false);
     } // buildRelations()
@@ -357,29 +363,31 @@ class PhotosTableMap extends TableMap
     public static function addSelectColumns(Criteria $criteria, $alias = null)
     {
         if (null === $alias) {
-            $criteria->addSelectColumn(PhotosTableMap::COL_PID);
+            $criteria->addSelectColumn(PhotosTableMap::COL_ID);
             $criteria->addSelectColumn(PhotosTableMap::COL_ALBUM_ID);
             $criteria->addSelectColumn(PhotosTableMap::COL_OWNER_ID);
-            $criteria->addSelectColumn(PhotosTableMap::COL_SRC);
-            $criteria->addSelectColumn(PhotosTableMap::COL_SRC_BIG);
-            $criteria->addSelectColumn(PhotosTableMap::COL_SRC_SMALL);
-            $criteria->addSelectColumn(PhotosTableMap::COL_SRC_XBIG);
+            $criteria->addSelectColumn(PhotosTableMap::COL_PHOTO_75);
+            $criteria->addSelectColumn(PhotosTableMap::COL_PHOTO_130);
+            $criteria->addSelectColumn(PhotosTableMap::COL_PHOTO_604);
+            $criteria->addSelectColumn(PhotosTableMap::COL_PHOTO_807);
+            $criteria->addSelectColumn(PhotosTableMap::COL_PHOTO_1280);
             $criteria->addSelectColumn(PhotosTableMap::COL_WIDTH);
             $criteria->addSelectColumn(PhotosTableMap::COL_HEIGHT);
-            $criteria->addSelectColumn(PhotosTableMap::COL_TITLE);
+            $criteria->addSelectColumn(PhotosTableMap::COL_TEXT);
             $criteria->addSelectColumn(PhotosTableMap::COL_CREATED);
             $criteria->addSelectColumn(PhotosTableMap::COL_LAST_SYNC);
         } else {
-            $criteria->addSelectColumn($alias . '.pid');
+            $criteria->addSelectColumn($alias . '.id');
             $criteria->addSelectColumn($alias . '.album_id');
             $criteria->addSelectColumn($alias . '.owner_id');
-            $criteria->addSelectColumn($alias . '.src');
-            $criteria->addSelectColumn($alias . '.src_big');
-            $criteria->addSelectColumn($alias . '.src_small');
-            $criteria->addSelectColumn($alias . '.src_xbig');
+            $criteria->addSelectColumn($alias . '.photo_75');
+            $criteria->addSelectColumn($alias . '.photo_130');
+            $criteria->addSelectColumn($alias . '.photo_604');
+            $criteria->addSelectColumn($alias . '.photo_807');
+            $criteria->addSelectColumn($alias . '.photo_1280');
             $criteria->addSelectColumn($alias . '.width');
             $criteria->addSelectColumn($alias . '.height');
-            $criteria->addSelectColumn($alias . '.title');
+            $criteria->addSelectColumn($alias . '.text');
             $criteria->addSelectColumn($alias . '.created');
             $criteria->addSelectColumn($alias . '.last_sync');
         }
@@ -433,7 +441,7 @@ class PhotosTableMap extends TableMap
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks
             $criteria = new Criteria(PhotosTableMap::DATABASE_NAME);
-            $criteria->add(PhotosTableMap::COL_PID, (array) $values, Criteria::IN);
+            $criteria->add(PhotosTableMap::COL_ID, (array) $values, Criteria::IN);
         }
 
         $query = PhotosQuery::create()->mergeWith($criteria);

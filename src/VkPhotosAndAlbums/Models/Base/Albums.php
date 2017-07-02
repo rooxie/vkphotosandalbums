@@ -69,11 +69,11 @@ abstract class Albums implements ActiveRecordInterface
     protected $virtualColumns = array();
 
     /**
-     * The value for the aid field.
+     * The value for the id field.
      *
      * @var        int
      */
-    protected $aid;
+    protected $id;
 
     /**
      * The value for the owner_id field.
@@ -88,6 +88,13 @@ abstract class Albums implements ActiveRecordInterface
      * @var        string
      */
     protected $title;
+
+    /**
+     * The value for the description field.
+     *
+     * @var        string
+     */
+    protected $description;
 
     /**
      * The value for the created field.
@@ -381,13 +388,13 @@ abstract class Albums implements ActiveRecordInterface
     }
 
     /**
-     * Get the [aid] column value.
+     * Get the [id] column value.
      *
      * @return int
      */
     public function getId()
     {
-        return $this->aid;
+        return $this->id;
     }
 
     /**
@@ -408,6 +415,16 @@ abstract class Albums implements ActiveRecordInterface
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Get the [description] column value.
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**
@@ -481,7 +498,7 @@ abstract class Albums implements ActiveRecordInterface
     }
 
     /**
-     * Set the value of [aid] column.
+     * Set the value of [id] column.
      *
      * @param int $v new value
      * @return $this|\VkPhotosAndAlbums\Models\Albums The current object (for fluent API support)
@@ -492,9 +509,9 @@ abstract class Albums implements ActiveRecordInterface
             $v = (int) $v;
         }
 
-        if ($this->aid !== $v) {
-            $this->aid = $v;
-            $this->modifiedColumns[AlbumsTableMap::COL_AID] = true;
+        if ($this->id !== $v) {
+            $this->id = $v;
+            $this->modifiedColumns[AlbumsTableMap::COL_ID] = true;
         }
 
         return $this;
@@ -543,6 +560,26 @@ abstract class Albums implements ActiveRecordInterface
 
         return $this;
     } // setTitle()
+
+    /**
+     * Set the value of [description] column.
+     *
+     * @param string $v new value
+     * @return $this|\VkPhotosAndAlbums\Models\Albums The current object (for fluent API support)
+     */
+    public function setDescription($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->description !== $v) {
+            $this->description = $v;
+            $this->modifiedColumns[AlbumsTableMap::COL_DESCRIPTION] = true;
+        }
+
+        return $this;
+    } // setDescription()
 
     /**
      * Sets the value of [created] column to a normalized version of the date/time value specified.
@@ -661,7 +698,7 @@ abstract class Albums implements ActiveRecordInterface
         try {
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 0 + $startcol : AlbumsTableMap::translateFieldName('Id', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->aid = (null !== $col) ? (int) $col : null;
+            $this->id = (null !== $col) ? (int) $col : null;
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 1 + $startcol : AlbumsTableMap::translateFieldName('OwnerId', TableMap::TYPE_PHPNAME, $indexType)];
             $this->owner_id = (null !== $col) ? (int) $col : null;
@@ -669,22 +706,25 @@ abstract class Albums implements ActiveRecordInterface
             $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : AlbumsTableMap::translateFieldName('Title', TableMap::TYPE_PHPNAME, $indexType)];
             $this->title = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : AlbumsTableMap::translateFieldName('Created', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : AlbumsTableMap::translateFieldName('Description', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->description = (null !== $col) ? (string) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : AlbumsTableMap::translateFieldName('Created', TableMap::TYPE_PHPNAME, $indexType)];
             if ($col === '0000-00-00 00:00:00') {
                 $col = null;
             }
             $this->created = (null !== $col) ? PropelDateTime::newInstance($col, null, 'DateTime') : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : AlbumsTableMap::translateFieldName('Updated', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : AlbumsTableMap::translateFieldName('Updated', TableMap::TYPE_PHPNAME, $indexType)];
             if ($col === '0000-00-00 00:00:00') {
                 $col = null;
             }
             $this->updated = (null !== $col) ? PropelDateTime::newInstance($col, null, 'DateTime') : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : AlbumsTableMap::translateFieldName('Size', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : AlbumsTableMap::translateFieldName('Size', TableMap::TYPE_PHPNAME, $indexType)];
             $this->size = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : AlbumsTableMap::translateFieldName('LastSync', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 7 + $startcol : AlbumsTableMap::translateFieldName('LastSync', TableMap::TYPE_PHPNAME, $indexType)];
             if ($col === '0000-00-00 00:00:00') {
                 $col = null;
             }
@@ -697,7 +737,7 @@ abstract class Albums implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 7; // 7 = AlbumsTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 8; // 8 = AlbumsTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException(sprintf('Error populating %s object', '\\VkPhotosAndAlbums\\Models\\Albums'), 0, $e);
@@ -892,9 +932,10 @@ abstract class Albums implements ActiveRecordInterface
 
             if ($this->photossScheduledForDeletion !== null) {
                 if (!$this->photossScheduledForDeletion->isEmpty()) {
-                    \VkPhotosAndAlbums\Models\PhotosQuery::create()
-                        ->filterByPrimaryKeys($this->photossScheduledForDeletion->getPrimaryKeys(false))
-                        ->delete($con);
+                    foreach ($this->photossScheduledForDeletion as $photos) {
+                        // need to save related object because we set the relation to null
+                        $photos->save($con);
+                    }
                     $this->photossScheduledForDeletion = null;
                 }
             }
@@ -929,14 +970,17 @@ abstract class Albums implements ActiveRecordInterface
 
 
          // check the columns in natural order for more readable SQL queries
-        if ($this->isColumnModified(AlbumsTableMap::COL_AID)) {
-            $modifiedColumns[':p' . $index++]  = 'aid';
+        if ($this->isColumnModified(AlbumsTableMap::COL_ID)) {
+            $modifiedColumns[':p' . $index++]  = 'id';
         }
         if ($this->isColumnModified(AlbumsTableMap::COL_OWNER_ID)) {
             $modifiedColumns[':p' . $index++]  = 'owner_id';
         }
         if ($this->isColumnModified(AlbumsTableMap::COL_TITLE)) {
             $modifiedColumns[':p' . $index++]  = 'title';
+        }
+        if ($this->isColumnModified(AlbumsTableMap::COL_DESCRIPTION)) {
+            $modifiedColumns[':p' . $index++]  = 'description';
         }
         if ($this->isColumnModified(AlbumsTableMap::COL_CREATED)) {
             $modifiedColumns[':p' . $index++]  = 'created';
@@ -961,14 +1005,17 @@ abstract class Albums implements ActiveRecordInterface
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case 'aid':
-                        $stmt->bindValue($identifier, $this->aid, PDO::PARAM_INT);
+                    case 'id':
+                        $stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
                     case 'owner_id':
                         $stmt->bindValue($identifier, $this->owner_id, PDO::PARAM_INT);
                         break;
                     case 'title':
                         $stmt->bindValue($identifier, $this->title, PDO::PARAM_STR);
+                        break;
+                    case 'description':
+                        $stmt->bindValue($identifier, $this->description, PDO::PARAM_STR);
                         break;
                     case 'created':
                         $stmt->bindValue($identifier, $this->created ? $this->created->format("Y-m-d H:i:s.u") : null, PDO::PARAM_STR);
@@ -1047,15 +1094,18 @@ abstract class Albums implements ActiveRecordInterface
                 return $this->getTitle();
                 break;
             case 3:
-                return $this->getCreated();
+                return $this->getDescription();
                 break;
             case 4:
-                return $this->getUpdated();
+                return $this->getCreated();
                 break;
             case 5:
-                return $this->getSize();
+                return $this->getUpdated();
                 break;
             case 6:
+                return $this->getSize();
+                break;
+            case 7:
                 return $this->getLastSync();
                 break;
             default:
@@ -1091,21 +1141,22 @@ abstract class Albums implements ActiveRecordInterface
             $keys[0] => $this->getId(),
             $keys[1] => $this->getOwnerId(),
             $keys[2] => $this->getTitle(),
-            $keys[3] => $this->getCreated(),
-            $keys[4] => $this->getUpdated(),
-            $keys[5] => $this->getSize(),
-            $keys[6] => $this->getLastSync(),
+            $keys[3] => $this->getDescription(),
+            $keys[4] => $this->getCreated(),
+            $keys[5] => $this->getUpdated(),
+            $keys[6] => $this->getSize(),
+            $keys[7] => $this->getLastSync(),
         );
-        if ($result[$keys[3]] instanceof \DateTime) {
-            $result[$keys[3]] = $result[$keys[3]]->format('c');
-        }
-
         if ($result[$keys[4]] instanceof \DateTime) {
             $result[$keys[4]] = $result[$keys[4]]->format('c');
         }
 
-        if ($result[$keys[6]] instanceof \DateTime) {
-            $result[$keys[6]] = $result[$keys[6]]->format('c');
+        if ($result[$keys[5]] instanceof \DateTime) {
+            $result[$keys[5]] = $result[$keys[5]]->format('c');
+        }
+
+        if ($result[$keys[7]] instanceof \DateTime) {
+            $result[$keys[7]] = $result[$keys[7]]->format('c');
         }
 
         $virtualColumns = $this->virtualColumns;
@@ -1188,15 +1239,18 @@ abstract class Albums implements ActiveRecordInterface
                 $this->setTitle($value);
                 break;
             case 3:
-                $this->setCreated($value);
+                $this->setDescription($value);
                 break;
             case 4:
-                $this->setUpdated($value);
+                $this->setCreated($value);
                 break;
             case 5:
-                $this->setSize($value);
+                $this->setUpdated($value);
                 break;
             case 6:
+                $this->setSize($value);
+                break;
+            case 7:
                 $this->setLastSync($value);
                 break;
         } // switch()
@@ -1235,16 +1289,19 @@ abstract class Albums implements ActiveRecordInterface
             $this->setTitle($arr[$keys[2]]);
         }
         if (array_key_exists($keys[3], $arr)) {
-            $this->setCreated($arr[$keys[3]]);
+            $this->setDescription($arr[$keys[3]]);
         }
         if (array_key_exists($keys[4], $arr)) {
-            $this->setUpdated($arr[$keys[4]]);
+            $this->setCreated($arr[$keys[4]]);
         }
         if (array_key_exists($keys[5], $arr)) {
-            $this->setSize($arr[$keys[5]]);
+            $this->setUpdated($arr[$keys[5]]);
         }
         if (array_key_exists($keys[6], $arr)) {
-            $this->setLastSync($arr[$keys[6]]);
+            $this->setSize($arr[$keys[6]]);
+        }
+        if (array_key_exists($keys[7], $arr)) {
+            $this->setLastSync($arr[$keys[7]]);
         }
     }
 
@@ -1287,14 +1344,17 @@ abstract class Albums implements ActiveRecordInterface
     {
         $criteria = new Criteria(AlbumsTableMap::DATABASE_NAME);
 
-        if ($this->isColumnModified(AlbumsTableMap::COL_AID)) {
-            $criteria->add(AlbumsTableMap::COL_AID, $this->aid);
+        if ($this->isColumnModified(AlbumsTableMap::COL_ID)) {
+            $criteria->add(AlbumsTableMap::COL_ID, $this->id);
         }
         if ($this->isColumnModified(AlbumsTableMap::COL_OWNER_ID)) {
             $criteria->add(AlbumsTableMap::COL_OWNER_ID, $this->owner_id);
         }
         if ($this->isColumnModified(AlbumsTableMap::COL_TITLE)) {
             $criteria->add(AlbumsTableMap::COL_TITLE, $this->title);
+        }
+        if ($this->isColumnModified(AlbumsTableMap::COL_DESCRIPTION)) {
+            $criteria->add(AlbumsTableMap::COL_DESCRIPTION, $this->description);
         }
         if ($this->isColumnModified(AlbumsTableMap::COL_CREATED)) {
             $criteria->add(AlbumsTableMap::COL_CREATED, $this->created);
@@ -1325,7 +1385,7 @@ abstract class Albums implements ActiveRecordInterface
     public function buildPkeyCriteria()
     {
         $criteria = ChildAlbumsQuery::create();
-        $criteria->add(AlbumsTableMap::COL_AID, $this->aid);
+        $criteria->add(AlbumsTableMap::COL_ID, $this->id);
 
         return $criteria;
     }
@@ -1362,7 +1422,7 @@ abstract class Albums implements ActiveRecordInterface
     }
 
     /**
-     * Generic method to set the primary key (aid column).
+     * Generic method to set the primary key (id column).
      *
      * @param       int $key Primary key.
      * @return void
@@ -1397,6 +1457,7 @@ abstract class Albums implements ActiveRecordInterface
         $copyObj->setId($this->getId());
         $copyObj->setOwnerId($this->getOwnerId());
         $copyObj->setTitle($this->getTitle());
+        $copyObj->setDescription($this->getDescription());
         $copyObj->setCreated($this->getCreated());
         $copyObj->setUpdated($this->getUpdated());
         $copyObj->setSize($this->getSize());
@@ -1727,7 +1788,7 @@ abstract class Albums implements ActiveRecordInterface
                 $this->photossScheduledForDeletion = clone $this->collPhotoss;
                 $this->photossScheduledForDeletion->clear();
             }
-            $this->photossScheduledForDeletion[]= clone $photos;
+            $this->photossScheduledForDeletion[]= $photos;
             $photos->setAlbums(null);
         }
 
@@ -1769,9 +1830,10 @@ abstract class Albums implements ActiveRecordInterface
         if (null !== $this->aUsers) {
             $this->aUsers->removeAlbums($this);
         }
-        $this->aid = null;
+        $this->id = null;
         $this->owner_id = null;
         $this->title = null;
+        $this->description = null;
         $this->created = null;
         $this->updated = null;
         $this->size = null;

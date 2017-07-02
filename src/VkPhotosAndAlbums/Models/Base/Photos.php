@@ -66,11 +66,11 @@ abstract class Photos implements ActiveRecordInterface
     protected $virtualColumns = array();
 
     /**
-     * The value for the pid field.
+     * The value for the id field.
      *
      * @var        int
      */
-    protected $pid;
+    protected $id;
 
     /**
      * The value for the album_id field.
@@ -87,32 +87,39 @@ abstract class Photos implements ActiveRecordInterface
     protected $owner_id;
 
     /**
-     * The value for the src field.
+     * The value for the photo_75 field.
      *
      * @var        string
      */
-    protected $src;
+    protected $photo_75;
 
     /**
-     * The value for the src_big field.
+     * The value for the photo_130 field.
      *
      * @var        string
      */
-    protected $src_big;
+    protected $photo_130;
 
     /**
-     * The value for the src_small field.
+     * The value for the photo_604 field.
      *
      * @var        string
      */
-    protected $src_small;
+    protected $photo_604;
 
     /**
-     * The value for the src_xbig field.
+     * The value for the photo_807 field.
      *
      * @var        string
      */
-    protected $src_xbig;
+    protected $photo_807;
+
+    /**
+     * The value for the photo_1280 field.
+     *
+     * @var        string
+     */
+    protected $photo_1280;
 
     /**
      * The value for the width field.
@@ -129,11 +136,11 @@ abstract class Photos implements ActiveRecordInterface
     protected $height;
 
     /**
-     * The value for the title field.
+     * The value for the text field.
      *
      * @var        string
      */
-    protected $title;
+    protected $text;
 
     /**
      * The value for the created field.
@@ -406,13 +413,13 @@ abstract class Photos implements ActiveRecordInterface
     }
 
     /**
-     * Get the [pid] column value.
+     * Get the [id] column value.
      *
      * @return int
      */
     public function getId()
     {
-        return $this->pid;
+        return $this->id;
     }
 
     /**
@@ -436,43 +443,53 @@ abstract class Photos implements ActiveRecordInterface
     }
 
     /**
-     * Get the [src] column value.
+     * Get the [photo_75] column value.
      *
      * @return string
      */
-    public function getSrc()
+    public function getPhoto75()
     {
-        return $this->src;
+        return $this->photo_75;
     }
 
     /**
-     * Get the [src_big] column value.
+     * Get the [photo_130] column value.
      *
      * @return string
      */
-    public function getSrcBig()
+    public function getPhoto130()
     {
-        return $this->src_big;
+        return $this->photo_130;
     }
 
     /**
-     * Get the [src_small] column value.
+     * Get the [photo_604] column value.
      *
      * @return string
      */
-    public function getSrcSmall()
+    public function getPhoto604()
     {
-        return $this->src_small;
+        return $this->photo_604;
     }
 
     /**
-     * Get the [src_xbig] column value.
+     * Get the [photo_807] column value.
      *
      * @return string
      */
-    public function getSrcXbig()
+    public function getPhoto807()
     {
-        return $this->src_xbig;
+        return $this->photo_807;
+    }
+
+    /**
+     * Get the [photo_1280] column value.
+     *
+     * @return string
+     */
+    public function getPhoto1280()
+    {
+        return $this->photo_1280;
     }
 
     /**
@@ -496,13 +513,13 @@ abstract class Photos implements ActiveRecordInterface
     }
 
     /**
-     * Get the [title] column value.
+     * Get the [text] column value.
      *
      * @return string
      */
-    public function getTitle()
+    public function getText()
     {
-        return $this->title;
+        return $this->text;
     }
 
     /**
@@ -546,7 +563,7 @@ abstract class Photos implements ActiveRecordInterface
     }
 
     /**
-     * Set the value of [pid] column.
+     * Set the value of [id] column.
      *
      * @param int $v new value
      * @return $this|\VkPhotosAndAlbums\Models\Photos The current object (for fluent API support)
@@ -557,9 +574,9 @@ abstract class Photos implements ActiveRecordInterface
             $v = (int) $v;
         }
 
-        if ($this->pid !== $v) {
-            $this->pid = $v;
-            $this->modifiedColumns[PhotosTableMap::COL_PID] = true;
+        if ($this->id !== $v) {
+            $this->id = $v;
+            $this->modifiedColumns[PhotosTableMap::COL_ID] = true;
         }
 
         return $this;
@@ -614,84 +631,104 @@ abstract class Photos implements ActiveRecordInterface
     } // setOwnerId()
 
     /**
-     * Set the value of [src] column.
+     * Set the value of [photo_75] column.
      *
      * @param string $v new value
      * @return $this|\VkPhotosAndAlbums\Models\Photos The current object (for fluent API support)
      */
-    public function setSrc($v)
+    public function setPhoto75($v)
     {
         if ($v !== null) {
             $v = (string) $v;
         }
 
-        if ($this->src !== $v) {
-            $this->src = $v;
-            $this->modifiedColumns[PhotosTableMap::COL_SRC] = true;
+        if ($this->photo_75 !== $v) {
+            $this->photo_75 = $v;
+            $this->modifiedColumns[PhotosTableMap::COL_PHOTO_75] = true;
         }
 
         return $this;
-    } // setSrc()
+    } // setPhoto75()
 
     /**
-     * Set the value of [src_big] column.
+     * Set the value of [photo_130] column.
      *
      * @param string $v new value
      * @return $this|\VkPhotosAndAlbums\Models\Photos The current object (for fluent API support)
      */
-    public function setSrcBig($v)
+    public function setPhoto130($v)
     {
         if ($v !== null) {
             $v = (string) $v;
         }
 
-        if ($this->src_big !== $v) {
-            $this->src_big = $v;
-            $this->modifiedColumns[PhotosTableMap::COL_SRC_BIG] = true;
+        if ($this->photo_130 !== $v) {
+            $this->photo_130 = $v;
+            $this->modifiedColumns[PhotosTableMap::COL_PHOTO_130] = true;
         }
 
         return $this;
-    } // setSrcBig()
+    } // setPhoto130()
 
     /**
-     * Set the value of [src_small] column.
+     * Set the value of [photo_604] column.
      *
      * @param string $v new value
      * @return $this|\VkPhotosAndAlbums\Models\Photos The current object (for fluent API support)
      */
-    public function setSrcSmall($v)
+    public function setPhoto604($v)
     {
         if ($v !== null) {
             $v = (string) $v;
         }
 
-        if ($this->src_small !== $v) {
-            $this->src_small = $v;
-            $this->modifiedColumns[PhotosTableMap::COL_SRC_SMALL] = true;
+        if ($this->photo_604 !== $v) {
+            $this->photo_604 = $v;
+            $this->modifiedColumns[PhotosTableMap::COL_PHOTO_604] = true;
         }
 
         return $this;
-    } // setSrcSmall()
+    } // setPhoto604()
 
     /**
-     * Set the value of [src_xbig] column.
+     * Set the value of [photo_807] column.
      *
      * @param string $v new value
      * @return $this|\VkPhotosAndAlbums\Models\Photos The current object (for fluent API support)
      */
-    public function setSrcXbig($v)
+    public function setPhoto807($v)
     {
         if ($v !== null) {
             $v = (string) $v;
         }
 
-        if ($this->src_xbig !== $v) {
-            $this->src_xbig = $v;
-            $this->modifiedColumns[PhotosTableMap::COL_SRC_XBIG] = true;
+        if ($this->photo_807 !== $v) {
+            $this->photo_807 = $v;
+            $this->modifiedColumns[PhotosTableMap::COL_PHOTO_807] = true;
         }
 
         return $this;
-    } // setSrcXbig()
+    } // setPhoto807()
+
+    /**
+     * Set the value of [photo_1280] column.
+     *
+     * @param string $v new value
+     * @return $this|\VkPhotosAndAlbums\Models\Photos The current object (for fluent API support)
+     */
+    public function setPhoto1280($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->photo_1280 !== $v) {
+            $this->photo_1280 = $v;
+            $this->modifiedColumns[PhotosTableMap::COL_PHOTO_1280] = true;
+        }
+
+        return $this;
+    } // setPhoto1280()
 
     /**
      * Set the value of [width] column.
@@ -734,24 +771,24 @@ abstract class Photos implements ActiveRecordInterface
     } // setHeight()
 
     /**
-     * Set the value of [title] column.
+     * Set the value of [text] column.
      *
      * @param string $v new value
      * @return $this|\VkPhotosAndAlbums\Models\Photos The current object (for fluent API support)
      */
-    public function setTitle($v)
+    public function setText($v)
     {
         if ($v !== null) {
             $v = (string) $v;
         }
 
-        if ($this->title !== $v) {
-            $this->title = $v;
-            $this->modifiedColumns[PhotosTableMap::COL_TITLE] = true;
+        if ($this->text !== $v) {
+            $this->text = $v;
+            $this->modifiedColumns[PhotosTableMap::COL_TEXT] = true;
         }
 
         return $this;
-    } // setTitle()
+    } // setText()
 
     /**
      * Sets the value of [created] column to a normalized version of the date/time value specified.
@@ -830,7 +867,7 @@ abstract class Photos implements ActiveRecordInterface
         try {
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 0 + $startcol : PhotosTableMap::translateFieldName('Id', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->pid = (null !== $col) ? (int) $col : null;
+            $this->id = (null !== $col) ? (int) $col : null;
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 1 + $startcol : PhotosTableMap::translateFieldName('AlbumId', TableMap::TYPE_PHPNAME, $indexType)];
             $this->album_id = (null !== $col) ? (int) $col : null;
@@ -838,34 +875,37 @@ abstract class Photos implements ActiveRecordInterface
             $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : PhotosTableMap::translateFieldName('OwnerId', TableMap::TYPE_PHPNAME, $indexType)];
             $this->owner_id = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : PhotosTableMap::translateFieldName('Src', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->src = (null !== $col) ? (string) $col : null;
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : PhotosTableMap::translateFieldName('Photo75', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->photo_75 = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : PhotosTableMap::translateFieldName('SrcBig', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->src_big = (null !== $col) ? (string) $col : null;
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : PhotosTableMap::translateFieldName('Photo130', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->photo_130 = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : PhotosTableMap::translateFieldName('SrcSmall', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->src_small = (null !== $col) ? (string) $col : null;
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : PhotosTableMap::translateFieldName('Photo604', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->photo_604 = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : PhotosTableMap::translateFieldName('SrcXbig', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->src_xbig = (null !== $col) ? (string) $col : null;
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : PhotosTableMap::translateFieldName('Photo807', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->photo_807 = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 7 + $startcol : PhotosTableMap::translateFieldName('Width', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 7 + $startcol : PhotosTableMap::translateFieldName('Photo1280', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->photo_1280 = (null !== $col) ? (string) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 8 + $startcol : PhotosTableMap::translateFieldName('Width', TableMap::TYPE_PHPNAME, $indexType)];
             $this->width = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 8 + $startcol : PhotosTableMap::translateFieldName('Height', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 9 + $startcol : PhotosTableMap::translateFieldName('Height', TableMap::TYPE_PHPNAME, $indexType)];
             $this->height = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 9 + $startcol : PhotosTableMap::translateFieldName('Title', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->title = (null !== $col) ? (string) $col : null;
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 10 + $startcol : PhotosTableMap::translateFieldName('Text', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->text = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 10 + $startcol : PhotosTableMap::translateFieldName('Created', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 11 + $startcol : PhotosTableMap::translateFieldName('Created', TableMap::TYPE_PHPNAME, $indexType)];
             if ($col === '0000-00-00 00:00:00') {
                 $col = null;
             }
             $this->created = (null !== $col) ? PropelDateTime::newInstance($col, null, 'DateTime') : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 11 + $startcol : PhotosTableMap::translateFieldName('LastSync', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 12 + $startcol : PhotosTableMap::translateFieldName('LastSync', TableMap::TYPE_PHPNAME, $indexType)];
             if ($col === '0000-00-00 00:00:00') {
                 $col = null;
             }
@@ -878,7 +918,7 @@ abstract class Photos implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 12; // 12 = PhotosTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 13; // 13 = PhotosTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException(sprintf('Error populating %s object', '\\VkPhotosAndAlbums\\Models\\Photos'), 0, $e);
@@ -1102,8 +1142,8 @@ abstract class Photos implements ActiveRecordInterface
 
 
          // check the columns in natural order for more readable SQL queries
-        if ($this->isColumnModified(PhotosTableMap::COL_PID)) {
-            $modifiedColumns[':p' . $index++]  = 'pid';
+        if ($this->isColumnModified(PhotosTableMap::COL_ID)) {
+            $modifiedColumns[':p' . $index++]  = 'id';
         }
         if ($this->isColumnModified(PhotosTableMap::COL_ALBUM_ID)) {
             $modifiedColumns[':p' . $index++]  = 'album_id';
@@ -1111,17 +1151,20 @@ abstract class Photos implements ActiveRecordInterface
         if ($this->isColumnModified(PhotosTableMap::COL_OWNER_ID)) {
             $modifiedColumns[':p' . $index++]  = 'owner_id';
         }
-        if ($this->isColumnModified(PhotosTableMap::COL_SRC)) {
-            $modifiedColumns[':p' . $index++]  = 'src';
+        if ($this->isColumnModified(PhotosTableMap::COL_PHOTO_75)) {
+            $modifiedColumns[':p' . $index++]  = 'photo_75';
         }
-        if ($this->isColumnModified(PhotosTableMap::COL_SRC_BIG)) {
-            $modifiedColumns[':p' . $index++]  = 'src_big';
+        if ($this->isColumnModified(PhotosTableMap::COL_PHOTO_130)) {
+            $modifiedColumns[':p' . $index++]  = 'photo_130';
         }
-        if ($this->isColumnModified(PhotosTableMap::COL_SRC_SMALL)) {
-            $modifiedColumns[':p' . $index++]  = 'src_small';
+        if ($this->isColumnModified(PhotosTableMap::COL_PHOTO_604)) {
+            $modifiedColumns[':p' . $index++]  = 'photo_604';
         }
-        if ($this->isColumnModified(PhotosTableMap::COL_SRC_XBIG)) {
-            $modifiedColumns[':p' . $index++]  = 'src_xbig';
+        if ($this->isColumnModified(PhotosTableMap::COL_PHOTO_807)) {
+            $modifiedColumns[':p' . $index++]  = 'photo_807';
+        }
+        if ($this->isColumnModified(PhotosTableMap::COL_PHOTO_1280)) {
+            $modifiedColumns[':p' . $index++]  = 'photo_1280';
         }
         if ($this->isColumnModified(PhotosTableMap::COL_WIDTH)) {
             $modifiedColumns[':p' . $index++]  = 'width';
@@ -1129,8 +1172,8 @@ abstract class Photos implements ActiveRecordInterface
         if ($this->isColumnModified(PhotosTableMap::COL_HEIGHT)) {
             $modifiedColumns[':p' . $index++]  = 'height';
         }
-        if ($this->isColumnModified(PhotosTableMap::COL_TITLE)) {
-            $modifiedColumns[':p' . $index++]  = 'title';
+        if ($this->isColumnModified(PhotosTableMap::COL_TEXT)) {
+            $modifiedColumns[':p' . $index++]  = 'text';
         }
         if ($this->isColumnModified(PhotosTableMap::COL_CREATED)) {
             $modifiedColumns[':p' . $index++]  = 'created';
@@ -1149,8 +1192,8 @@ abstract class Photos implements ActiveRecordInterface
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case 'pid':
-                        $stmt->bindValue($identifier, $this->pid, PDO::PARAM_INT);
+                    case 'id':
+                        $stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
                     case 'album_id':
                         $stmt->bindValue($identifier, $this->album_id, PDO::PARAM_INT);
@@ -1158,17 +1201,20 @@ abstract class Photos implements ActiveRecordInterface
                     case 'owner_id':
                         $stmt->bindValue($identifier, $this->owner_id, PDO::PARAM_INT);
                         break;
-                    case 'src':
-                        $stmt->bindValue($identifier, $this->src, PDO::PARAM_STR);
+                    case 'photo_75':
+                        $stmt->bindValue($identifier, $this->photo_75, PDO::PARAM_STR);
                         break;
-                    case 'src_big':
-                        $stmt->bindValue($identifier, $this->src_big, PDO::PARAM_STR);
+                    case 'photo_130':
+                        $stmt->bindValue($identifier, $this->photo_130, PDO::PARAM_STR);
                         break;
-                    case 'src_small':
-                        $stmt->bindValue($identifier, $this->src_small, PDO::PARAM_STR);
+                    case 'photo_604':
+                        $stmt->bindValue($identifier, $this->photo_604, PDO::PARAM_STR);
                         break;
-                    case 'src_xbig':
-                        $stmt->bindValue($identifier, $this->src_xbig, PDO::PARAM_STR);
+                    case 'photo_807':
+                        $stmt->bindValue($identifier, $this->photo_807, PDO::PARAM_STR);
+                        break;
+                    case 'photo_1280':
+                        $stmt->bindValue($identifier, $this->photo_1280, PDO::PARAM_STR);
                         break;
                     case 'width':
                         $stmt->bindValue($identifier, $this->width, PDO::PARAM_INT);
@@ -1176,8 +1222,8 @@ abstract class Photos implements ActiveRecordInterface
                     case 'height':
                         $stmt->bindValue($identifier, $this->height, PDO::PARAM_INT);
                         break;
-                    case 'title':
-                        $stmt->bindValue($identifier, $this->title, PDO::PARAM_STR);
+                    case 'text':
+                        $stmt->bindValue($identifier, $this->text, PDO::PARAM_STR);
                         break;
                     case 'created':
                         $stmt->bindValue($identifier, $this->created ? $this->created->format("Y-m-d H:i:s.u") : null, PDO::PARAM_STR);
@@ -1250,30 +1296,33 @@ abstract class Photos implements ActiveRecordInterface
                 return $this->getOwnerId();
                 break;
             case 3:
-                return $this->getSrc();
+                return $this->getPhoto75();
                 break;
             case 4:
-                return $this->getSrcBig();
+                return $this->getPhoto130();
                 break;
             case 5:
-                return $this->getSrcSmall();
+                return $this->getPhoto604();
                 break;
             case 6:
-                return $this->getSrcXbig();
+                return $this->getPhoto807();
                 break;
             case 7:
-                return $this->getWidth();
+                return $this->getPhoto1280();
                 break;
             case 8:
-                return $this->getHeight();
+                return $this->getWidth();
                 break;
             case 9:
-                return $this->getTitle();
+                return $this->getHeight();
                 break;
             case 10:
-                return $this->getCreated();
+                return $this->getText();
                 break;
             case 11:
+                return $this->getCreated();
+                break;
+            case 12:
                 return $this->getLastSync();
                 break;
             default:
@@ -1309,22 +1358,23 @@ abstract class Photos implements ActiveRecordInterface
             $keys[0] => $this->getId(),
             $keys[1] => $this->getAlbumId(),
             $keys[2] => $this->getOwnerId(),
-            $keys[3] => $this->getSrc(),
-            $keys[4] => $this->getSrcBig(),
-            $keys[5] => $this->getSrcSmall(),
-            $keys[6] => $this->getSrcXbig(),
-            $keys[7] => $this->getWidth(),
-            $keys[8] => $this->getHeight(),
-            $keys[9] => $this->getTitle(),
-            $keys[10] => $this->getCreated(),
-            $keys[11] => $this->getLastSync(),
+            $keys[3] => $this->getPhoto75(),
+            $keys[4] => $this->getPhoto130(),
+            $keys[5] => $this->getPhoto604(),
+            $keys[6] => $this->getPhoto807(),
+            $keys[7] => $this->getPhoto1280(),
+            $keys[8] => $this->getWidth(),
+            $keys[9] => $this->getHeight(),
+            $keys[10] => $this->getText(),
+            $keys[11] => $this->getCreated(),
+            $keys[12] => $this->getLastSync(),
         );
-        if ($result[$keys[10]] instanceof \DateTime) {
-            $result[$keys[10]] = $result[$keys[10]]->format('c');
-        }
-
         if ($result[$keys[11]] instanceof \DateTime) {
             $result[$keys[11]] = $result[$keys[11]]->format('c');
+        }
+
+        if ($result[$keys[12]] instanceof \DateTime) {
+            $result[$keys[12]] = $result[$keys[12]]->format('c');
         }
 
         $virtualColumns = $this->virtualColumns;
@@ -1407,30 +1457,33 @@ abstract class Photos implements ActiveRecordInterface
                 $this->setOwnerId($value);
                 break;
             case 3:
-                $this->setSrc($value);
+                $this->setPhoto75($value);
                 break;
             case 4:
-                $this->setSrcBig($value);
+                $this->setPhoto130($value);
                 break;
             case 5:
-                $this->setSrcSmall($value);
+                $this->setPhoto604($value);
                 break;
             case 6:
-                $this->setSrcXbig($value);
+                $this->setPhoto807($value);
                 break;
             case 7:
-                $this->setWidth($value);
+                $this->setPhoto1280($value);
                 break;
             case 8:
-                $this->setHeight($value);
+                $this->setWidth($value);
                 break;
             case 9:
-                $this->setTitle($value);
+                $this->setHeight($value);
                 break;
             case 10:
-                $this->setCreated($value);
+                $this->setText($value);
                 break;
             case 11:
+                $this->setCreated($value);
+                break;
+            case 12:
                 $this->setLastSync($value);
                 break;
         } // switch()
@@ -1469,31 +1522,34 @@ abstract class Photos implements ActiveRecordInterface
             $this->setOwnerId($arr[$keys[2]]);
         }
         if (array_key_exists($keys[3], $arr)) {
-            $this->setSrc($arr[$keys[3]]);
+            $this->setPhoto75($arr[$keys[3]]);
         }
         if (array_key_exists($keys[4], $arr)) {
-            $this->setSrcBig($arr[$keys[4]]);
+            $this->setPhoto130($arr[$keys[4]]);
         }
         if (array_key_exists($keys[5], $arr)) {
-            $this->setSrcSmall($arr[$keys[5]]);
+            $this->setPhoto604($arr[$keys[5]]);
         }
         if (array_key_exists($keys[6], $arr)) {
-            $this->setSrcXbig($arr[$keys[6]]);
+            $this->setPhoto807($arr[$keys[6]]);
         }
         if (array_key_exists($keys[7], $arr)) {
-            $this->setWidth($arr[$keys[7]]);
+            $this->setPhoto1280($arr[$keys[7]]);
         }
         if (array_key_exists($keys[8], $arr)) {
-            $this->setHeight($arr[$keys[8]]);
+            $this->setWidth($arr[$keys[8]]);
         }
         if (array_key_exists($keys[9], $arr)) {
-            $this->setTitle($arr[$keys[9]]);
+            $this->setHeight($arr[$keys[9]]);
         }
         if (array_key_exists($keys[10], $arr)) {
-            $this->setCreated($arr[$keys[10]]);
+            $this->setText($arr[$keys[10]]);
         }
         if (array_key_exists($keys[11], $arr)) {
-            $this->setLastSync($arr[$keys[11]]);
+            $this->setCreated($arr[$keys[11]]);
+        }
+        if (array_key_exists($keys[12], $arr)) {
+            $this->setLastSync($arr[$keys[12]]);
         }
     }
 
@@ -1536,8 +1592,8 @@ abstract class Photos implements ActiveRecordInterface
     {
         $criteria = new Criteria(PhotosTableMap::DATABASE_NAME);
 
-        if ($this->isColumnModified(PhotosTableMap::COL_PID)) {
-            $criteria->add(PhotosTableMap::COL_PID, $this->pid);
+        if ($this->isColumnModified(PhotosTableMap::COL_ID)) {
+            $criteria->add(PhotosTableMap::COL_ID, $this->id);
         }
         if ($this->isColumnModified(PhotosTableMap::COL_ALBUM_ID)) {
             $criteria->add(PhotosTableMap::COL_ALBUM_ID, $this->album_id);
@@ -1545,17 +1601,20 @@ abstract class Photos implements ActiveRecordInterface
         if ($this->isColumnModified(PhotosTableMap::COL_OWNER_ID)) {
             $criteria->add(PhotosTableMap::COL_OWNER_ID, $this->owner_id);
         }
-        if ($this->isColumnModified(PhotosTableMap::COL_SRC)) {
-            $criteria->add(PhotosTableMap::COL_SRC, $this->src);
+        if ($this->isColumnModified(PhotosTableMap::COL_PHOTO_75)) {
+            $criteria->add(PhotosTableMap::COL_PHOTO_75, $this->photo_75);
         }
-        if ($this->isColumnModified(PhotosTableMap::COL_SRC_BIG)) {
-            $criteria->add(PhotosTableMap::COL_SRC_BIG, $this->src_big);
+        if ($this->isColumnModified(PhotosTableMap::COL_PHOTO_130)) {
+            $criteria->add(PhotosTableMap::COL_PHOTO_130, $this->photo_130);
         }
-        if ($this->isColumnModified(PhotosTableMap::COL_SRC_SMALL)) {
-            $criteria->add(PhotosTableMap::COL_SRC_SMALL, $this->src_small);
+        if ($this->isColumnModified(PhotosTableMap::COL_PHOTO_604)) {
+            $criteria->add(PhotosTableMap::COL_PHOTO_604, $this->photo_604);
         }
-        if ($this->isColumnModified(PhotosTableMap::COL_SRC_XBIG)) {
-            $criteria->add(PhotosTableMap::COL_SRC_XBIG, $this->src_xbig);
+        if ($this->isColumnModified(PhotosTableMap::COL_PHOTO_807)) {
+            $criteria->add(PhotosTableMap::COL_PHOTO_807, $this->photo_807);
+        }
+        if ($this->isColumnModified(PhotosTableMap::COL_PHOTO_1280)) {
+            $criteria->add(PhotosTableMap::COL_PHOTO_1280, $this->photo_1280);
         }
         if ($this->isColumnModified(PhotosTableMap::COL_WIDTH)) {
             $criteria->add(PhotosTableMap::COL_WIDTH, $this->width);
@@ -1563,8 +1622,8 @@ abstract class Photos implements ActiveRecordInterface
         if ($this->isColumnModified(PhotosTableMap::COL_HEIGHT)) {
             $criteria->add(PhotosTableMap::COL_HEIGHT, $this->height);
         }
-        if ($this->isColumnModified(PhotosTableMap::COL_TITLE)) {
-            $criteria->add(PhotosTableMap::COL_TITLE, $this->title);
+        if ($this->isColumnModified(PhotosTableMap::COL_TEXT)) {
+            $criteria->add(PhotosTableMap::COL_TEXT, $this->text);
         }
         if ($this->isColumnModified(PhotosTableMap::COL_CREATED)) {
             $criteria->add(PhotosTableMap::COL_CREATED, $this->created);
@@ -1589,7 +1648,7 @@ abstract class Photos implements ActiveRecordInterface
     public function buildPkeyCriteria()
     {
         $criteria = ChildPhotosQuery::create();
-        $criteria->add(PhotosTableMap::COL_PID, $this->pid);
+        $criteria->add(PhotosTableMap::COL_ID, $this->id);
 
         return $criteria;
     }
@@ -1626,7 +1685,7 @@ abstract class Photos implements ActiveRecordInterface
     }
 
     /**
-     * Generic method to set the primary key (pid column).
+     * Generic method to set the primary key (id column).
      *
      * @param       int $key Primary key.
      * @return void
@@ -1661,13 +1720,14 @@ abstract class Photos implements ActiveRecordInterface
         $copyObj->setId($this->getId());
         $copyObj->setAlbumId($this->getAlbumId());
         $copyObj->setOwnerId($this->getOwnerId());
-        $copyObj->setSrc($this->getSrc());
-        $copyObj->setSrcBig($this->getSrcBig());
-        $copyObj->setSrcSmall($this->getSrcSmall());
-        $copyObj->setSrcXbig($this->getSrcXbig());
+        $copyObj->setPhoto75($this->getPhoto75());
+        $copyObj->setPhoto130($this->getPhoto130());
+        $copyObj->setPhoto604($this->getPhoto604());
+        $copyObj->setPhoto807($this->getPhoto807());
+        $copyObj->setPhoto1280($this->getPhoto1280());
         $copyObj->setWidth($this->getWidth());
         $copyObj->setHeight($this->getHeight());
-        $copyObj->setTitle($this->getTitle());
+        $copyObj->setText($this->getText());
         $copyObj->setCreated($this->getCreated());
         $copyObj->setLastSync($this->getLastSync());
         if ($makeNew) {
@@ -1812,16 +1872,17 @@ abstract class Photos implements ActiveRecordInterface
         if (null !== $this->aAlbums) {
             $this->aAlbums->removePhotos($this);
         }
-        $this->pid = null;
+        $this->id = null;
         $this->album_id = null;
         $this->owner_id = null;
-        $this->src = null;
-        $this->src_big = null;
-        $this->src_small = null;
-        $this->src_xbig = null;
+        $this->photo_75 = null;
+        $this->photo_130 = null;
+        $this->photo_604 = null;
+        $this->photo_807 = null;
+        $this->photo_1280 = null;
         $this->width = null;
         $this->height = null;
-        $this->title = null;
+        $this->text = null;
         $this->created = null;
         $this->last_sync = null;
         $this->alreadyInSave = false;

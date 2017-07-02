@@ -59,7 +59,7 @@ class AlbumsTableMap extends TableMap
     /**
      * The total number of columns
      */
-    const NUM_COLUMNS = 7;
+    const NUM_COLUMNS = 8;
 
     /**
      * The number of lazy-loaded columns
@@ -69,12 +69,12 @@ class AlbumsTableMap extends TableMap
     /**
      * The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS)
      */
-    const NUM_HYDRATE_COLUMNS = 7;
+    const NUM_HYDRATE_COLUMNS = 8;
 
     /**
-     * the column name for the aid field
+     * the column name for the id field
      */
-    const COL_AID = 'albums.aid';
+    const COL_ID = 'albums.id';
 
     /**
      * the column name for the owner_id field
@@ -85,6 +85,11 @@ class AlbumsTableMap extends TableMap
      * the column name for the title field
      */
     const COL_TITLE = 'albums.title';
+
+    /**
+     * the column name for the description field
+     */
+    const COL_DESCRIPTION = 'albums.description';
 
     /**
      * the column name for the created field
@@ -118,11 +123,11 @@ class AlbumsTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('Id', 'OwnerId', 'Title', 'Created', 'Updated', 'Size', 'LastSync', ),
-        self::TYPE_CAMELNAME     => array('id', 'ownerId', 'title', 'created', 'updated', 'size', 'lastSync', ),
-        self::TYPE_COLNAME       => array(AlbumsTableMap::COL_AID, AlbumsTableMap::COL_OWNER_ID, AlbumsTableMap::COL_TITLE, AlbumsTableMap::COL_CREATED, AlbumsTableMap::COL_UPDATED, AlbumsTableMap::COL_SIZE, AlbumsTableMap::COL_LAST_SYNC, ),
-        self::TYPE_FIELDNAME     => array('aid', 'owner_id', 'title', 'created', 'updated', 'size', 'last_sync', ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, )
+        self::TYPE_PHPNAME       => array('Id', 'OwnerId', 'Title', 'Description', 'Created', 'Updated', 'Size', 'LastSync', ),
+        self::TYPE_CAMELNAME     => array('id', 'ownerId', 'title', 'description', 'created', 'updated', 'size', 'lastSync', ),
+        self::TYPE_COLNAME       => array(AlbumsTableMap::COL_ID, AlbumsTableMap::COL_OWNER_ID, AlbumsTableMap::COL_TITLE, AlbumsTableMap::COL_DESCRIPTION, AlbumsTableMap::COL_CREATED, AlbumsTableMap::COL_UPDATED, AlbumsTableMap::COL_SIZE, AlbumsTableMap::COL_LAST_SYNC, ),
+        self::TYPE_FIELDNAME     => array('id', 'owner_id', 'title', 'description', 'created', 'updated', 'size', 'last_sync', ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, )
     );
 
     /**
@@ -132,11 +137,11 @@ class AlbumsTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('Id' => 0, 'OwnerId' => 1, 'Title' => 2, 'Created' => 3, 'Updated' => 4, 'Size' => 5, 'LastSync' => 6, ),
-        self::TYPE_CAMELNAME     => array('id' => 0, 'ownerId' => 1, 'title' => 2, 'created' => 3, 'updated' => 4, 'size' => 5, 'lastSync' => 6, ),
-        self::TYPE_COLNAME       => array(AlbumsTableMap::COL_AID => 0, AlbumsTableMap::COL_OWNER_ID => 1, AlbumsTableMap::COL_TITLE => 2, AlbumsTableMap::COL_CREATED => 3, AlbumsTableMap::COL_UPDATED => 4, AlbumsTableMap::COL_SIZE => 5, AlbumsTableMap::COL_LAST_SYNC => 6, ),
-        self::TYPE_FIELDNAME     => array('aid' => 0, 'owner_id' => 1, 'title' => 2, 'created' => 3, 'updated' => 4, 'size' => 5, 'last_sync' => 6, ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, )
+        self::TYPE_PHPNAME       => array('Id' => 0, 'OwnerId' => 1, 'Title' => 2, 'Description' => 3, 'Created' => 4, 'Updated' => 5, 'Size' => 6, 'LastSync' => 7, ),
+        self::TYPE_CAMELNAME     => array('id' => 0, 'ownerId' => 1, 'title' => 2, 'description' => 3, 'created' => 4, 'updated' => 5, 'size' => 6, 'lastSync' => 7, ),
+        self::TYPE_COLNAME       => array(AlbumsTableMap::COL_ID => 0, AlbumsTableMap::COL_OWNER_ID => 1, AlbumsTableMap::COL_TITLE => 2, AlbumsTableMap::COL_DESCRIPTION => 3, AlbumsTableMap::COL_CREATED => 4, AlbumsTableMap::COL_UPDATED => 5, AlbumsTableMap::COL_SIZE => 6, AlbumsTableMap::COL_LAST_SYNC => 7, ),
+        self::TYPE_FIELDNAME     => array('id' => 0, 'owner_id' => 1, 'title' => 2, 'description' => 3, 'created' => 4, 'updated' => 5, 'size' => 6, 'last_sync' => 7, ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, )
     );
 
     /**
@@ -156,9 +161,10 @@ class AlbumsTableMap extends TableMap
         $this->setPackage('VkPhotosAndAlbums.Models');
         $this->setUseIdGenerator(false);
         // columns
-        $this->addPrimaryKey('aid', 'Id', 'INTEGER', true, null, null);
+        $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
         $this->addForeignKey('owner_id', 'OwnerId', 'INTEGER', 'users', 'id', true, null, null);
         $this->addColumn('title', 'Title', 'VARCHAR', true, 255, null);
+        $this->addColumn('description', 'Description', 'LONGVARCHAR', false, null, null);
         $this->addColumn('created', 'Created', 'TIMESTAMP', true, null, null);
         $this->addColumn('updated', 'Updated', 'TIMESTAMP', true, null, null);
         $this->addColumn('size', 'Size', 'VARCHAR', true, 255, null);
@@ -181,7 +187,7 @@ class AlbumsTableMap extends TableMap
   0 =>
   array (
     0 => ':album_id',
-    1 => ':aid',
+    1 => ':id',
   ),
 ), null, null, 'Photoss', false);
     } // buildRelations()
@@ -327,17 +333,19 @@ class AlbumsTableMap extends TableMap
     public static function addSelectColumns(Criteria $criteria, $alias = null)
     {
         if (null === $alias) {
-            $criteria->addSelectColumn(AlbumsTableMap::COL_AID);
+            $criteria->addSelectColumn(AlbumsTableMap::COL_ID);
             $criteria->addSelectColumn(AlbumsTableMap::COL_OWNER_ID);
             $criteria->addSelectColumn(AlbumsTableMap::COL_TITLE);
+            $criteria->addSelectColumn(AlbumsTableMap::COL_DESCRIPTION);
             $criteria->addSelectColumn(AlbumsTableMap::COL_CREATED);
             $criteria->addSelectColumn(AlbumsTableMap::COL_UPDATED);
             $criteria->addSelectColumn(AlbumsTableMap::COL_SIZE);
             $criteria->addSelectColumn(AlbumsTableMap::COL_LAST_SYNC);
         } else {
-            $criteria->addSelectColumn($alias . '.aid');
+            $criteria->addSelectColumn($alias . '.id');
             $criteria->addSelectColumn($alias . '.owner_id');
             $criteria->addSelectColumn($alias . '.title');
+            $criteria->addSelectColumn($alias . '.description');
             $criteria->addSelectColumn($alias . '.created');
             $criteria->addSelectColumn($alias . '.updated');
             $criteria->addSelectColumn($alias . '.size');
@@ -393,7 +401,7 @@ class AlbumsTableMap extends TableMap
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks
             $criteria = new Criteria(AlbumsTableMap::DATABASE_NAME);
-            $criteria->add(AlbumsTableMap::COL_AID, (array) $values, Criteria::IN);
+            $criteria->add(AlbumsTableMap::COL_ID, (array) $values, Criteria::IN);
         }
 
         $query = AlbumsQuery::create()->mergeWith($criteria);
