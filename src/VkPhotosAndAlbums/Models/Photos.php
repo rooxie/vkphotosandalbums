@@ -22,5 +22,25 @@ class Photos extends BasePhotos
         $self = (new self())
             ->setId($photo['id'])
             ->setOwnerId($photo['owner_id'])
+            ->setText($photo['text'])
+            ->setCreated($photo['date']);
+
+        if (isset($photo['Width'])) {
+            $self->setWidth($photo['width']);
+        }
+
+        if (isset($photo['Height'])) {
+            $self->setWidth($photo['height']);
+        }
+
+        foreach ([75, 130, 604, 807, 1280, 2560] as $size) {
+            $sizeKey = 'photo_' . $size;
+            $method = 'setPhoto' . $size;
+            if (isset($photo[$sizeKey])) {
+                $self->$method($photo[$sizeKey]);
+            }
+        }
+
+        $self->save();
     }
 }
