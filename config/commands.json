@@ -28,5 +28,15 @@
         "description": "Identification of the user"
       }
     }
-  }
+  },
+  "get-users": {
+    "class": "GetUsersCommand",
+    "description": "Get users info from local database",
+    "args": {
+      "user-id": {
+        "required": true,
+        "description": "Identification of the user"
+      }
+    }
+  },
 }
