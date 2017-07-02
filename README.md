@@ -1,21 +1,22 @@
 ### Installation
-- Install Composer dependencies.
+- Create a database;
 ```
-composer install
+CREATE DATABASE vk_photos_and_albums;
 ```
 
-- Generate a user API token following the instucrions on `https://vk.com/dev/implicit_flow_user`.
+- Generate a user API token following the instucrions on `https://vk.com/dev/implicit_flow_user`'
 
-- Create `.env` file.
-
-On Unix
+- Create `.env` file from `.env.example` and provide it with database credentials and VK token;
 ```
 cp .env.example .env
 ```
 
-On Windows
+- Install Composer dependencies;
 ```
-copy .env.example .env
+composer install
 ```
 
-- Provide VK API token and MySQL credentials to `.env` file.
+- Execute `generated-sql/vk_photos_and_albums.sql` in your database;
+```
+mysql vk_photos_and_albums < generated-sql/vk_photos_and_albums.sql
+```
