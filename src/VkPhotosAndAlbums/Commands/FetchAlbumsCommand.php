@@ -20,18 +20,17 @@ class FetchAlbumsCommand extends BaseCommand
     protected function perform(): void
     {
         $userId = array_pop($this->args['user-id']);
-
-        $user = UsersQuery::create()->findById($userId);
+        $user   = UsersQuery::create()->findById($userId);
 
         if (!count($user)) {
             $user = $this->fetchUsers([$userId])[0];
             $this->createUser($user['id'], $user['first_name'], $user['last_name']);
         }
 
-        $albums = $this->vk()->getAlbums($userId);
+        $albums     = $this->vk()->getAlbums($userId);
+        $count      = count($albums);
 
-        $count = count($albums);
-        $progress = new ProgressBar($this->output, $count);
+        $progress   = new ProgressBar($this->output, $count);
 
         foreach ($albums as $album) {
             try {
