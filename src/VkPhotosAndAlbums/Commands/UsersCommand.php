@@ -24,7 +24,7 @@ class UsersCommand extends BaseCommand
 
             foreach ($remoteUsers as $user) {
                 $newUser = (new Users())
-                    ->setId($user['uid'])
+                    ->setId($user['id'])
                     ->setFirstName($user['first_name'])
                     ->setLastName($user['last_name']);
                 $newUser->save();

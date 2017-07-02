@@ -17,6 +17,11 @@ class VkApiFacade implements VkPhotosAccess, VkUsersAccess
         $this->connection = $connection;
     }
 
+    public function getUsers(array $userIds): array
+    {
+        return $this->connection->callMethod('users.get', ['user_ids' => $userIds])['data'];
+    }
+
     public function getPhotos(string $userId, int $limit = 200): array
     {
         $collection = [];
@@ -51,8 +56,37 @@ class VkApiFacade implements VkPhotosAccess, VkUsersAccess
         return $collection;
     }
 
-    public function getUsers(array $userIds): array
+    public function getAlbums(string $userId, int $limit = 200): array
     {
-        return $this->connection->callMethod('users.get', ['user_ids' => $userIds]);
+        $collection = [];
+
+        $getBatch = function (int $offset) use ($userId, $limit): array {
+            return $this->connection->callMethod('photos.getAll', [
+                'owner_id'  => $userId,
+                'count'     => $limit,
+                'offset'    => $offset
+            ]);
+        };
+
+        $add = function (int $fetched = 0) use (&$collection, $getBatch, &$add): void {
+            $batch = $getBatch($fetched);
+
+            if ($photos = $batch['data']) {
+                foreach ($photos['items'] as $photo) {
+                    if (!isset($collection[$photo['id']])) {
+                        $collection[$photo['id']] = $photo;
+                        $fetched++;
+                    }
+                }
+
+                if ($photos['count'] - $fetched > 0) {
+                    $add($fetched);
+                }
+            }
+        };
+
+        $add();
+
+        return $collection;
     }
 }
