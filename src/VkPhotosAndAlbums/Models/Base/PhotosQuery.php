@@ -28,6 +28,7 @@ use VkPhotosAndAlbums\Models\Map\PhotosTableMap;
  * @method     ChildPhotosQuery orderByPhoto604($order = Criteria::ASC) Order by the photo_604 column
  * @method     ChildPhotosQuery orderByPhoto807($order = Criteria::ASC) Order by the photo_807 column
  * @method     ChildPhotosQuery orderByPhoto1280($order = Criteria::ASC) Order by the photo_1280 column
+ * @method     ChildPhotosQuery orderByPhoto2560($order = Criteria::ASC) Order by the photo_2560 column
  * @method     ChildPhotosQuery orderByWidth($order = Criteria::ASC) Order by the width column
  * @method     ChildPhotosQuery orderByHeight($order = Criteria::ASC) Order by the height column
  * @method     ChildPhotosQuery orderByText($order = Criteria::ASC) Order by the text column
@@ -42,6 +43,7 @@ use VkPhotosAndAlbums\Models\Map\PhotosTableMap;
  * @method     ChildPhotosQuery groupByPhoto604() Group by the photo_604 column
  * @method     ChildPhotosQuery groupByPhoto807() Group by the photo_807 column
  * @method     ChildPhotosQuery groupByPhoto1280() Group by the photo_1280 column
+ * @method     ChildPhotosQuery groupByPhoto2560() Group by the photo_2560 column
  * @method     ChildPhotosQuery groupByWidth() Group by the width column
  * @method     ChildPhotosQuery groupByHeight() Group by the height column
  * @method     ChildPhotosQuery groupByText() Group by the text column
@@ -89,6 +91,7 @@ use VkPhotosAndAlbums\Models\Map\PhotosTableMap;
  * @method     ChildPhotos findOneByPhoto604(string $photo_604) Return the first ChildPhotos filtered by the photo_604 column
  * @method     ChildPhotos findOneByPhoto807(string $photo_807) Return the first ChildPhotos filtered by the photo_807 column
  * @method     ChildPhotos findOneByPhoto1280(string $photo_1280) Return the first ChildPhotos filtered by the photo_1280 column
+ * @method     ChildPhotos findOneByPhoto2560(string $photo_2560) Return the first ChildPhotos filtered by the photo_2560 column
  * @method     ChildPhotos findOneByWidth(int $width) Return the first ChildPhotos filtered by the width column
  * @method     ChildPhotos findOneByHeight(int $height) Return the first ChildPhotos filtered by the height column
  * @method     ChildPhotos findOneByText(string $text) Return the first ChildPhotos filtered by the text column
@@ -106,6 +109,7 @@ use VkPhotosAndAlbums\Models\Map\PhotosTableMap;
  * @method     ChildPhotos requireOneByPhoto604(string $photo_604) Return the first ChildPhotos filtered by the photo_604 column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPhotos requireOneByPhoto807(string $photo_807) Return the first ChildPhotos filtered by the photo_807 column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPhotos requireOneByPhoto1280(string $photo_1280) Return the first ChildPhotos filtered by the photo_1280 column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildPhotos requireOneByPhoto2560(string $photo_2560) Return the first ChildPhotos filtered by the photo_2560 column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPhotos requireOneByWidth(int $width) Return the first ChildPhotos filtered by the width column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPhotos requireOneByHeight(int $height) Return the first ChildPhotos filtered by the height column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPhotos requireOneByText(string $text) Return the first ChildPhotos filtered by the text column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
@@ -121,6 +125,7 @@ use VkPhotosAndAlbums\Models\Map\PhotosTableMap;
  * @method     ChildPhotos[]|ObjectCollection findByPhoto604(string $photo_604) Return ChildPhotos objects filtered by the photo_604 column
  * @method     ChildPhotos[]|ObjectCollection findByPhoto807(string $photo_807) Return ChildPhotos objects filtered by the photo_807 column
  * @method     ChildPhotos[]|ObjectCollection findByPhoto1280(string $photo_1280) Return ChildPhotos objects filtered by the photo_1280 column
+ * @method     ChildPhotos[]|ObjectCollection findByPhoto2560(string $photo_2560) Return ChildPhotos objects filtered by the photo_2560 column
  * @method     ChildPhotos[]|ObjectCollection findByWidth(int $width) Return ChildPhotos objects filtered by the width column
  * @method     ChildPhotos[]|ObjectCollection findByHeight(int $height) Return ChildPhotos objects filtered by the height column
  * @method     ChildPhotos[]|ObjectCollection findByText(string $text) Return ChildPhotos objects filtered by the text column
@@ -224,7 +229,7 @@ abstract class PhotosQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT id, album_id, owner_id, photo_75, photo_130, photo_604, photo_807, photo_1280, width, height, text, created, last_sync FROM photos WHERE id = :p0';
+        $sql = 'SELECT id, album_id, owner_id, photo_75, photo_130, photo_604, photo_807, photo_1280, photo_2560, width, height, text, created, last_sync FROM photos WHERE id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -564,6 +569,31 @@ abstract class PhotosQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(PhotosTableMap::COL_PHOTO_1280, $photo1280, $comparison);
+    }
+
+    /**
+     * Filter the query on the photo_2560 column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByPhoto2560('fooValue');   // WHERE photo_2560 = 'fooValue'
+     * $query->filterByPhoto2560('%fooValue%', Criteria::LIKE); // WHERE photo_2560 LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $photo2560 The value to use as filter.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildPhotosQuery The current query, for fluid interface
+     */
+    public function filterByPhoto2560($photo2560 = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($photo2560)) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(PhotosTableMap::COL_PHOTO_2560, $photo2560, $comparison);
     }
 
     /**
