@@ -2,30 +2,22 @@
 
 namespace VkPhotosAndAlbums\Commands;
 
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use VkPhotosAndAlbums\Models\PhotosQuery;
-use VkPhotosAndAlbums\Models\UserQuery;
-
-class PhotosCommand extends Command
+class PhotosCommand extends BaseCommand
 {
-    public function execute(InputInterface $input, OutputInterface $output)
+    protected $args = ['user-id' => []];
+    protected $usersInDb = [];
+
+    protected function perform(): void
     {
-        $userId = $input->getArgument('user-id');
-
-        if (!$input->getOption('remote')) {
-            $photos = PhotosQuery::create()->findByOwnerId($userId)->toArray();
-
-            if ($photos) {
-                $this->output($photos);
-                return;
-            }
-        }
+        $photos = $this->vk()->getPhotos(array_pop($this->args['user-id']));
     }
 
-    protected function output(array $data): void
+    protected function outputPhoto(array $photo): void
     {
-
+        $this->output->writeln(PHP_EOL);
+        $this->output->writeln('<info>Id: </info>' . $photo);
+        $this->output->writeln('<info>First Name: </info>' . $user->getFirstName());
+        $this->output->writeln('<info>Last Name: </info>' . $user->getLastName());
+        $this->output->writeln('<info>Source: </info>' . $source);
     }
 }
