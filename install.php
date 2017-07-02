@@ -43,4 +43,5 @@ $propel = [
 
 file_put_contents('config/propel.php', "<?php\nreturn " . var_export($propel, true) . ';');
 
-//exec('php vendor/bin/propel model:build --schema-dir ./config --output-dir ./src --config-dir ./config -vv');
+// exec('php vendor/bin/propel model:build --schema-dir ./config --output-dir ./src --config-dir ./config -vv');
+// exec('php vendor/bin/propel sql:build --config-dir ./config --schema-dir ./config');

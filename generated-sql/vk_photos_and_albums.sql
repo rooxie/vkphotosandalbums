@@ -26,14 +26,15 @@ DROP TABLE IF EXISTS `albums`;
 
 CREATE TABLE `albums`
 (
-    `aid` INTEGER NOT NULL,
+    `id` INTEGER NOT NULL,
     `owner_id` INTEGER NOT NULL,
     `title` VARCHAR(255) NOT NULL,
+    `description` TEXT,
     `created` DATETIME NOT NULL,
     `updated` DATETIME NOT NULL,
     `size` VARCHAR(255) NOT NULL,
     `last_sync` TIMESTAMP NOT NULL DEFAULT now(),
-    PRIMARY KEY (`aid`),
+    PRIMARY KEY (`id`),
     INDEX `albums_owner_id_index` (`owner_id`),
     CONSTRAINT `albums_fk_973e78`
         FOREIGN KEY (`owner_id`)
@@ -48,27 +49,28 @@ DROP TABLE IF EXISTS `photos`;
 
 CREATE TABLE `photos`
 (
-    `pid` INTEGER NOT NULL,
-    `album_id` INTEGER NOT NULL,
+    `id` INTEGER NOT NULL,
+    `album_id` INTEGER,
     `owner_id` INTEGER NOT NULL,
-    `src` VARCHAR(255) NOT NULL,
-    `src_big` VARCHAR(255) NOT NULL,
-    `src_small` VARCHAR(255) NOT NULL,
-    `src_xbig` VARCHAR(255) NOT NULL,
+    `photo_75` VARCHAR(255) NOT NULL,
+    `photo_130` VARCHAR(255) NOT NULL,
+    `photo_604` VARCHAR(255) NOT NULL,
+    `photo_807` VARCHAR(255) NOT NULL,
+    `photo_1280` VARCHAR(255) NOT NULL,
     `width` INTEGER NOT NULL,
     `height` INTEGER NOT NULL,
-    `title` TEXT NOT NULL,
+    `text` TEXT,
     `created` DATETIME NOT NULL,
     `last_sync` TIMESTAMP NOT NULL DEFAULT now(),
-    PRIMARY KEY (`pid`),
+    PRIMARY KEY (`id`),
     INDEX `photos_owner_id_index` (`owner_id`),
-    INDEX `photos_fi_db128d` (`album_id`),
+    INDEX `photos_fi_e8a595` (`album_id`),
     CONSTRAINT `photos_fk_973e78`
         FOREIGN KEY (`owner_id`)
         REFERENCES `users` (`id`),
-    CONSTRAINT `photos_fk_db128d`
+    CONSTRAINT `photos_fk_e8a595`
         FOREIGN KEY (`album_id`)
-        REFERENCES `albums` (`aid`)
+        REFERENCES `albums` (`id`)
 ) ENGINE=InnoDB;
 
 # This restores the fkey checks, after having unset them earlier
