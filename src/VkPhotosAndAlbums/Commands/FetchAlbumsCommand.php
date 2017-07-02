@@ -12,7 +12,7 @@ use VkPhotosAndAlbums\Models\UsersQuery;
 
 class FetchAlbumsCommand extends BaseCommand
 {
-    use CreateUser, FetchUsers, CreateAlbum;
+    use CreateUser, FetchUsers;
 
     protected $args = ['user-id' => []];
     protected $usersInDb = [];

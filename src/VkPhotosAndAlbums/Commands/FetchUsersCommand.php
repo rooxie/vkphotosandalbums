@@ -6,7 +6,7 @@ use VkPhotosAndAlbums\Commands\Traits\CreateUser;
 use VkPhotosAndAlbums\Models\Users;
 use VkPhotosAndAlbums\Models\UsersQuery;
 
-class UsersCommand extends BaseCommand
+class FetchUsersCommand extends BaseCommand
 {
     use CreateUser;
 

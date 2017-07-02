@@ -2,7 +2,6 @@
 
 namespace VkPhotosAndAlbums\Commands;
 
-use Carbon\Carbon;
 use Propel\Runtime\Exception\PropelException;
 use Symfony\Component\Console\Helper\ProgressBar;
 use VkPhotosAndAlbums\Commands\Traits\CreateUser;

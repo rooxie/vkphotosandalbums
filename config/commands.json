@@ -1,6 +1,7 @@
 {
-  "users": {
-    "class": "UsersCommand",
+  "fetch-users": {
+    "class": "FetchUsersCommand",
+    "description": "Fetch users from Vk",
     "args": {
       "user-id": {
         "required": true,
@@ -16,16 +17,11 @@
         "required": true,
         "description": "Identification of the user"
       }
-    },
-    "opts": {
-      "remote": {
-        "shortcut": "r",
-        "description": "Ignore database query and search directly on VK"
-      }
     }
   },
   "fetch-albums": {
     "class": "FetchAlbumsCommand",
+    "description": "Fetch user albums from Vk",
     "args": {
       "user-id": {
         "required": true,
