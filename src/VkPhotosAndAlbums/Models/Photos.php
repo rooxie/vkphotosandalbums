@@ -2,7 +2,6 @@
 
 namespace VkPhotosAndAlbums\Models;
 
-use Propel\Runtime\Collection\Collection;
 use VkPhotosAndAlbums\Models\Base\Photos as BasePhotos;
 
 /**
