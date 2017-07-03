@@ -8,10 +8,7 @@ use VkPhotosAndAlbums\Models\UsersQuery;
 
 class GetUsersCommand extends BaseCommand
 {
-    use CreateUser;
-
     protected $args = ['user-id' => []];
-    protected $usersInDb = [];
 
     protected function perform(): void
     {
