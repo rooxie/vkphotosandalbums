@@ -4,8 +4,6 @@ if (!file_exists('.env')) {
     exit(".env file is missing\n");
 }
 
-exec('composer install');
-
 require 'vendor/autoload.php';
 
 (new \Dotenv\Dotenv(__DIR__))->load();
