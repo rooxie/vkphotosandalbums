@@ -16,6 +16,9 @@ class GetUsersCommand extends BaseCommand
     protected function perform(): void
     {
         $users = UsersQuery::create()->findById($this->args['user-id']);
+        $count = count($users);
+
+        $this->output->writeln("Found {$count} users in the database");
 
         foreach ($users as $user) {
             $this->outputUser($user);
