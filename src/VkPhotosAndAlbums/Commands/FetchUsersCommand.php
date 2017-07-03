@@ -10,7 +10,6 @@ use VkPhotosAndAlbums\Models\User;
 class FetchUsersCommand extends BaseCommand
 {
     protected $args = ['user-id' => []];
-    protected $usersInDb = [];
 
     protected function perform(): void
     {

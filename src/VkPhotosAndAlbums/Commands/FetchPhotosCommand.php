@@ -33,8 +33,7 @@ class FetchPhotosCommand extends BaseCommand
         foreach ($photos as $photo) {
             try {
                 Photos::create($photo);
-            } catch (PropelException $e) {
-            }
+            } catch (PropelException $e) {}
 
             $progress->advance();
         }

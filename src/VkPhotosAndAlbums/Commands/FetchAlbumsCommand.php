@@ -14,7 +14,6 @@ class FetchAlbumsCommand extends BaseCommand
     use CreateUser, FetchUsers;
 
     protected $args = ['user-id' => []];
-    protected $usersInDb = [];
 
     protected function perform(): void
     {
