@@ -16,5 +16,12 @@ use VkPhotosAndAlbums\Models\Base\Users as BaseUsers;
  */
 class Users extends BaseUsers
 {
-
+    public static function create(array $user): void
+    {
+        (new self())
+            ->setId($user['id'])
+            ->setFirstName($user['first_name'])
+            ->setLastName($user['last_name'])
+            ->save();
+    }
 }

@@ -2,10 +2,9 @@
 
 namespace VkPhotosAndAlbums\Commands;
 
-
 use Propel\Runtime\Exception\PropelException;
 use Symfony\Component\Console\Helper\ProgressBar;
-use VkPhotosAndAlbums\Models\User;
+use VkPhotosAndAlbums\Models\Users;
 
 class FetchUsersCommand extends BaseCommand
 {
@@ -20,7 +19,7 @@ class FetchUsersCommand extends BaseCommand
 
         foreach ($users as $user) {
             try {
-                User::create($user);
+                Users::create($user);
             } catch (PropelException $e) {}
 
             $progress->advance();
